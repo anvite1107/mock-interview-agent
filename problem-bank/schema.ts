@@ -1,0 +1,1 @@
+// zod schema for problem bank entries

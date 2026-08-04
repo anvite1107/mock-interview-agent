@@ -1,0 +1,1 @@
+// assembles rubric + transcript → Claude prompt

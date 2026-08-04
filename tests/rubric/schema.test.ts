@@ -1,0 +1,1 @@
+// validate rubric.config.json against schema, independence checks
