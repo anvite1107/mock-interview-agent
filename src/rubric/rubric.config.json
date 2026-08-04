@@ -46,7 +46,7 @@
       "groundedBy": "execution:edge",
       "anchors": {
         "1": "Code passes none of the edge-tagged test cases.",
-        "2": "Code passes fewer than half of the edge-tagged test cases.",
+        "2": "Code passes some but not all edge-tagged test cases.",
         "3": "Code passes all edge-tagged test cases in the problem bank.",
         "4": "Code passes all edge-tagged test cases, and candidate verbally names at least one edge case included in the test suite before running it.",
         "5": "Code passes all edge-tagged test cases, and candidate verbally identifies an edge case not present in the test suite."
