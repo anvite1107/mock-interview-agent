@@ -51,27 +51,32 @@ export type RubricCategory = z.infer<typeof RubricCategorySchema>;
 
 // ─── RubricConfig ─────────────────────────────────────────
 // The full rubric: a list of categories whose weights must sum to 100.
-export const RubricConfigSchema = z
-  .object({
-    categories: z.array(RubricCategorySchema),
-  })
-  .refine(
-    (config) => {
-      const total = config.categories.reduce((sum, c) => sum + c.weight, 0);
-      // floating-point safe comparison instead of === 100
-      return Math.abs(total - 100) < 0.001;
-    },
-    (config) => {
-      const total = config.categories.reduce((sum, c) => sum + c.weight, 0);
-      return { message: `Category weights must sum to 100, got ${total}` };
+const RubricConfigShape = z.object({
+  categories: z.array(RubricCategorySchema),
+});
+
+type RubricConfigInput = z.infer<typeof RubricConfigShape>;
+
+export const RubricConfigSchema = RubricConfigShape.superRefine(
+  (config: RubricConfigInput, ctx) => {
+    const total = config.categories.reduce((sum, c) => sum + c.weight, 0);
+    if (Math.abs(total - 100) >= 0.001) {
+      ctx.addIssue({
+        code: "custom",
+        message: `Category weights must sum to 100, got ${total}`,
+        path: ["categories"],
+      });
     }
-  )
-  .refine(
-    (config) => {
-      const ids = config.categories.map((c) => c.id);
-      return new Set(ids).size === ids.length;
-    },
-    { message: "Category ids must be unique" }
-  );
+
+    const ids = config.categories.map((c) => c.id);
+    if (new Set(ids).size !== ids.length) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Category ids must be unique",
+        path: ["categories"],
+      });
+    }
+  }
+);
 
 export type RubricConfig = z.infer<typeof RubricConfigSchema>;

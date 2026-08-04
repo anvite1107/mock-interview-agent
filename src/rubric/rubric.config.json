@@ -1,0 +1,82 @@
+{
+  "categories": [
+    {
+      "id": "problem-understanding",
+      "label": "Problem understanding",
+      "weight": 15,
+      "groundedBy": "stated-words",
+      "anchors": {
+        "1": "Candidate does not restate the problem in their own words, or restates it in a way that contradicts the prompt.",
+        "2": "Candidate restates the problem but omits a stated constraint or input/output requirement.",
+        "3": "Candidate restates the problem correctly, including inputs, outputs, and constraints, without prompting.",
+        "4": "Candidate restates the problem correctly and asks at least one clarifying question about an ambiguous constraint.",
+        "5": "Candidate restates the problem, asks clarifying questions, and explicitly surfaces an edge case or assumption not stated in the prompt before coding."
+      }
+    },
+    {
+      "id": "approach-correctness",
+      "label": "Approach correctness",
+      "weight": 20,
+      "groundedBy": "reference-comparison",
+      "anchors": {
+        "1": "Candidate's stated approach would not produce correct output even if implemented perfectly.",
+        "2": "Candidate's approach solves the problem but is a brute-force method when a materially better approach exists in the reference solution.",
+        "3": "Candidate's approach matches the reference solution's algorithmic strategy.",
+        "4": "Candidate's approach matches the reference solution, and candidate names at least one alternative approach they considered and rejected, with a stated reason.",
+        "5": "Candidate's approach matches or improves on the reference solution's complexity, and candidate justifies the choice by comparing tradeoffs against at least one rejected alternative."
+      }
+    },
+    {
+      "id": "complexity-analysis",
+      "label": "Complexity analysis",
+      "weight": 15,
+      "groundedBy": "stated-complexity",
+      "anchors": {
+        "1": "Candidate does not state a time or space complexity for their approach.",
+        "2": "Candidate states a complexity, but it does not match their actual implementation.",
+        "3": "Candidate states a time and space complexity that accurately matches their implementation.",
+        "4": "Candidate accurately states time and space complexity and explains which part of the code drives each.",
+        "5": "Candidate accurately states complexity, explains the driving factors, and identifies how the complexity would change under a stated variation of the input."
+      }
+    },
+    {
+      "id": "edge-case-handling",
+      "label": "Edge-case handling",
+      "weight": 15,
+      "groundedBy": "execution:edge",
+      "anchors": {
+        "1": "Code passes none of the edge-tagged test cases.",
+        "2": "Code passes fewer than half of the edge-tagged test cases.",
+        "3": "Code passes all edge-tagged test cases in the problem bank.",
+        "4": "Code passes all edge-tagged test cases, and candidate verbally names at least one edge case included in the test suite before running it.",
+        "5": "Code passes all edge-tagged test cases, and candidate verbally identifies an edge case not present in the test suite."
+      }
+    },
+    {
+      "id": "code-correctness",
+      "label": "Code correctness",
+      "weight": 20,
+      "groundedBy": "execution:core",
+      "anchors": {
+        "1": "Code passes none of the core-tagged test cases.",
+        "2": "Code passes some but not all core-tagged test cases.",
+        "3": "Code passes all core-tagged test cases.",
+        "4": "Code passes all core-tagged test cases on the first execution attempt, with no debugging iterations required.",
+        "5": "Code passes all core-tagged test cases on the first attempt, and candidate traces through at least one test case by hand before running the code."
+      }
+    },
+    {
+      "id": "communication",
+      "label": "Communication",
+      "weight": 15,
+      "groundedBy": "narration-structure",
+      "anchors": {
+        "1": "Candidate writes code silently with no narration of what they are doing.",
+        "2": "Candidate narrates sporadically, with long silent stretches during implementation.",
+        "3": "Candidate narrates continuously through problem understanding, approach, and implementation.",
+        "4": "Candidate narrates continuously and signals transitions between phases.",
+        "5": "Candidate narrates continuously, signals phase transitions, and checks in with the interviewer at natural decision points."
+      }
+    }
+  ]
+}
