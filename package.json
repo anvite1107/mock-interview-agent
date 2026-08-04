@@ -1,0 +1,31 @@
+{
+  "name": "mock-interview-agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anvite1107/mock-interview-agent.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anvite1107/mock-interview-agent/issues"
+  },
+  "homepage": "https://github.com/anvite1107/mock-interview-agent#readme",
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "typescript": "^7.0.2",
+    "type" : "module"
+  }
+}
