@@ -1,0 +1,13 @@
+{
+  "id": "wrong-id",
+  "title": "Bad Id Problem",
+  "difficulty": "easy",
+  "prompt": "This file's id does not match its filename.",
+  "functionSignature": "def solution(x: int) -> int:",
+  "constraints": ["1 <= x <= 100"],
+  "referenceComplexity": { "time": "O(1)", "space": "O(1)" },
+  "testCases": [
+    { "id": "core-1", "input": [1], "expectedOutput": 1, "tag": "core" },
+    { "id": "edge-1", "input": [0], "expectedOutput": 0, "tag": "edge" }
+  ]
+}

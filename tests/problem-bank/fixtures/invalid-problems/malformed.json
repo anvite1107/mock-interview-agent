@@ -1,0 +1,5 @@
+{
+  "id": "malformed",
+  "title": "Malformed Problem",
+  "difficulty": "easy",
+  "prompt": "This file has broken JSON syntax.",
