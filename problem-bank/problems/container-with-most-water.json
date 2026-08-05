@@ -1,0 +1,18 @@
+{
+  "id": "container-with-most-water",
+  "title": "Container With Most Water",
+  "difficulty": "medium",
+  "prompt": "You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of line i are (i, 0) and (i, height[i]). Find two lines that together with the x-axis form a container that holds the most water. Return the maximum amount of water it can store.",
+  "functionSignature": "def solution(height: List[int]) -> int:",
+  "constraints": ["2 <= len(height) <= 10^5", "0 <= height[i] <= 10^4"],
+  "referenceComplexity": { "time": "O(n)", "space": "O(1)" },
+  "testCases": [
+    { "id": "core-1", "input": [[1, 8, 6, 2, 5, 4, 8, 3, 7]], "expectedOutput": 49, "tag": "core" },
+    { "id": "core-2", "input": [[1, 1]], "expectedOutput": 1, "tag": "core" },
+    { "id": "core-3", "input": [[4, 3, 2, 1, 4]], "expectedOutput": 16, "tag": "core" },
+    { "id": "edge-1", "input": [[1, 2, 1]], "expectedOutput": 2, "tag": "edge" },
+    { "id": "edge-2", "input": [[5, 5, 5, 5]], "expectedOutput": 15, "tag": "edge" },
+    { "id": "edge-3", "input": [[1, 8, 100, 2, 100, 1]], "expectedOutput": 200, "tag": "edge" },
+    { "id": "edge-4", "input": [[1, 2, 4, 3]], "expectedOutput": 4, "tag": "edge" }
+  ]
+}

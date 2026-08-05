@@ -1,0 +1,18 @@
+{
+  "id": "best-time-to-buy-and-sell-stock",
+  "title": "Best Time to Buy and Sell Stock",
+  "difficulty": "easy",
+  "prompt": "You are given an array prices where prices[i] is the price of a stock on day i. You want to maximize profit by choosing a single day to buy and a different later day to sell. Return the maximum profit achievable, or 0 if no profit is possible.",
+  "functionSignature": "def solution(prices: List[int]) -> int:",
+  "constraints": ["1 <= len(prices) <= 10^5", "0 <= prices[i] <= 10^4"],
+  "referenceComplexity": { "time": "O(n)", "space": "O(1)" },
+  "testCases": [
+    { "id": "core-1", "input": [[7, 1, 5, 3, 6, 4]], "expectedOutput": 5, "tag": "core" },
+    { "id": "core-2", "input": [[1, 2, 3, 4, 5]], "expectedOutput": 4, "tag": "core" },
+    { "id": "core-3", "input": [[2, 4, 1]], "expectedOutput": 2, "tag": "core" },
+    { "id": "edge-1", "input": [[7, 6, 4, 3, 1]], "expectedOutput": 0, "tag": "edge" },
+    { "id": "edge-2", "input": [[1]], "expectedOutput": 0, "tag": "edge" },
+    { "id": "edge-3", "input": [[3, 3, 3, 3]], "expectedOutput": 0, "tag": "edge" },
+    { "id": "edge-4", "input": [[2, 1, 2, 1, 0, 4]], "expectedOutput": 4, "tag": "edge" }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "find-the-duplicate-number",
+  "title": "Find the Duplicate Number",
+  "difficulty": "hard",
+  "prompt": "Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive, there is exactly one repeated number (which may appear more than twice). Find this repeated number without modifying the array and using only O(1) extra space.",
+  "functionSignature": "def solution(nums: List[int]) -> int:",
+  "constraints": [
+    "1 <= n <= 10^5",
+    "len(nums) == n + 1",
+    "1 <= nums[i] <= n",
+    "All integers appear once except exactly one, which appears two or more times"
+  ],
+  "referenceComplexity": { "time": "O(n)", "space": "O(1)" },
+  "testCases": [
+    { "id": "core-1", "input": [[1, 3, 4, 2, 2]], "expectedOutput": 2, "tag": "core" },
+    { "id": "core-2", "input": [[3, 1, 3, 4, 2]], "expectedOutput": 3, "tag": "core" },
+    { "id": "core-3", "input": [[2, 2, 2, 2, 2]], "expectedOutput": 2, "tag": "core" },
+    { "id": "edge-1", "input": [[1, 1]], "expectedOutput": 1, "tag": "edge" },
+    { "id": "edge-2", "input": [[1, 2, 2]], "expectedOutput": 2, "tag": "edge" },
+    { "id": "edge-3", "input": [[5, 4, 3, 2, 1, 1]], "expectedOutput": 1, "tag": "edge" },
+    { "id": "edge-4", "input": [[4, 1, 2, 3, 4]], "expectedOutput": 4, "tag": "edge" }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "longest-substring-without-repeating-characters",
+  "title": "Longest Substring Without Repeating Characters",
+  "difficulty": "medium",
+  "prompt": "Given a string s, find the length of the longest substring without repeating characters.",
+  "functionSignature": "def solution(s: str) -> int:",
+  "constraints": ["0 <= len(s) <= 5 * 10^4", "s consists of English letters, digits, symbols, and spaces"],
+  "referenceComplexity": { "time": "O(n)", "space": "O(min(n, m))" },
+  "testCases": [
+    { "id": "core-1", "input": ["abcabcbb"], "expectedOutput": 3, "tag": "core" },
+    { "id": "core-2", "input": ["bbbbb"], "expectedOutput": 1, "tag": "core" },
+    { "id": "core-3", "input": ["pwwkew"], "expectedOutput": 3, "tag": "core" },
+    { "id": "edge-1", "input": [""], "expectedOutput": 0, "tag": "edge" },
+    { "id": "edge-2", "input": [" "], "expectedOutput": 1, "tag": "edge" },
+    { "id": "edge-3", "input": ["au"], "expectedOutput": 2, "tag": "edge" },
+    { "id": "edge-4", "input": ["dvdf"], "expectedOutput": 3, "tag": "edge" }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "valid-parentheses",
+  "title": "Valid Parentheses",
+  "difficulty": "easy",
+  "prompt": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. A string is valid if every open bracket is closed by the same type of bracket, and brackets are closed in the correct order.",
+  "functionSignature": "def solution(s: str) -> bool:",
+  "constraints": ["1 <= len(s) <= 10^4", "s consists only of the characters '()[]{}'"],
+  "referenceComplexity": { "time": "O(n)", "space": "O(n)" },
+  "testCases": [
+    { "id": "core-1", "input": ["()"], "expectedOutput": true, "tag": "core" },
+    { "id": "core-2", "input": ["()[]{}"], "expectedOutput": true, "tag": "core" },
+    { "id": "core-3", "input": ["(]"], "expectedOutput": false, "tag": "core" },
+    { "id": "edge-1", "input": [")("], "expectedOutput": false, "tag": "edge" },
+    { "id": "edge-2", "input": ["((("], "expectedOutput": false, "tag": "edge" },
+    { "id": "edge-3", "input": ["([)]"], "expectedOutput": false, "tag": "edge" },
+    { "id": "edge-4", "input": ["{[]}"], "expectedOutput": true, "tag": "edge" }
+  ]
+}
