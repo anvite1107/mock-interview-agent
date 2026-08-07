@@ -1,0 +1,25 @@
+{
+  "problemId": "valid-parentheses",
+  "transcript": [
+    { "speaker": "interviewer", "state": "problem-intro", "text": "Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if it's valid. Every open bracket must be closed by the same type of bracket, in the correct order. String length is between 1 and 10^4, and the string only ever contains those bracket characters." },
+    { "speaker": "candidate", "state": "clarifying-questions", "text": "Got it — so I need to check that every opening bracket has a matching closing bracket of the same type, in the right nested order. I'll use a stack: push opening brackets, and when I hit a closing bracket, check it matches the top of the stack." },
+    { "speaker": "interviewer", "state": "clarifying-questions", "text": "Sounds good, go ahead." },
+    { "speaker": "candidate", "state": "coding", "text": "I'll map each closing bracket to its corresponding opening bracket for easy lookup. Push opens onto a stack, and for closes, pop and compare." },
+    { "speaker": "candidate", "state": "coding", "text": "def solution(s):\n    stack = []\n    pairs = {')': '(', '}': '{', ']': '['}\n    for char in s:\n        if char in '([{':\n            stack.append(char)\n        elif char in ')]}':\n            if not stack or stack.pop() != pairs[char]:\n                return False\n    return len(stack) == 0" },
+    { "speaker": "interviewer", "state": "testing-debugging", "text": "Let's run it." },
+    { "speaker": "candidate", "state": "testing-debugging", "text": "All passing. The empty stack check at the end handles unclosed brackets, and the pop-check handles mismatched types." },
+    { "speaker": "interviewer", "state": "complexity-discussion", "text": "What's the time and space complexity?" },
+    { "speaker": "candidate", "state": "complexity-discussion", "text": "Time is O(n) since I make one pass through the string. Space is O(n) worst case if the string is all opening brackets, since they'd all sit on the stack." },
+    { "speaker": "interviewer", "state": "wrap-up", "text": "Anything you'd change?" },
+    { "speaker": "candidate", "state": "wrap-up", "text": "This feels solid to me — clean stack-based solution, I don't see anything I'd change." }
+  ],
+  "executionResults": [
+    { "testCaseId": "core-1", "tag": "core", "passed": true },
+    { "testCaseId": "core-2", "tag": "core", "passed": true },
+    { "testCaseId": "core-3", "tag": "core", "passed": true },
+    { "testCaseId": "edge-1", "tag": "edge", "passed": true },
+    { "testCaseId": "edge-2", "tag": "edge", "passed": true },
+    { "testCaseId": "edge-3", "tag": "edge", "passed": true },
+    { "testCaseId": "edge-4", "tag": "edge", "passed": true }
+  ]
+}
