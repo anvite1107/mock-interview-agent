@@ -1,6 +1,6 @@
 // decision policy, probe caps
-import { SessionState, InterviewState, TransitionReason, INTERVIEW_STATES } from "./states.js";
-import { evaluateTransition, applyTransition, recordProbe } from "./policy.js";
+import { SessionState, InterviewState, TransitionReason, INTERVIEW_STATES } from "./states.ts";
+import { evaluateTransition, applyTransition, recordProbe } from "./policy.ts";
 
 export interface TurnInput {
   candidateTriggeredAdvance: boolean; // caller decides this

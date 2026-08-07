@@ -1,4 +1,4 @@
-import { loadRubric } from "./loadRubric.js";
+import { loadRubric } from "./loadRubric.ts";
 
 const rubric = loadRubric();
 console.log(`Loaded ${rubric.categories.length} categories:`);

@@ -2,7 +2,7 @@
 // rubric.config.json contains the actual rubric data (6 categories, anchors)
 
 import { readFileSync } from "node:fs";
-import { RubricConfigSchema, type RubricConfig } from "./schema.js";
+import { RubricConfigSchema, type RubricConfig } from "./schema.ts";
 
 const RUBRIC_PATH = new URL("./rubric.config.json", import.meta.url);
 

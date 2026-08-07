@@ -1,6 +1,6 @@
 // transition rules
 // src/engine/policy.ts
-import { InterviewState, INTERVIEW_STATES, PROBE_CAPS, SessionState, TransitionReason } from "./states.js";
+import { InterviewState, INTERVIEW_STATES, PROBE_CAPS, SessionState, TransitionReason } from "./states.ts";
 
 export interface ProbeDecision {
   shouldAdvance: boolean;

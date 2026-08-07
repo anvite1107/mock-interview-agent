@@ -1,7 +1,11 @@
 // problem-bank/loadProblems.ts
 import { readdirSync, readFileSync } from "fs";
-import { join, basename } from "path";
-import { ProblemSchema, type Problem } from "./schema.js";
+import { fileURLToPath } from "url";
+import { join, basename, dirname } from "path";
+import { ProblemSchema, type Problem } from "./schema.ts";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const PROBLEMS_DIR = join(__dirname, "problems");
 
