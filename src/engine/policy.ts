@@ -2,11 +2,9 @@
 // src/engine/policy.ts
 import { InterviewState, INTERVIEW_STATES, PROBE_CAPS, SessionState, TransitionReason } from "./states.ts";
 
-export interface ProbeDecision {
-  shouldAdvance: boolean;
-  reason: TransitionReason | null;
-  nextState: InterviewState | null;
-}
+export type ProbeDecision =
+  | { shouldAdvance: true; reason: TransitionReason; nextState: InterviewState }
+  | { shouldAdvance: false; reason: null; nextState: null };
 
 // Looks up the state that comes after `current` in the fixed sequence.
 // Returns null if `current` is the terminal state (wrap-up).
@@ -59,10 +57,11 @@ export function applyTransition(
   session: SessionState,
   decision: ProbeDecision
 ): SessionState {
-  if (!decision.shouldAdvance || decision.nextState === null) {
+  if (!decision.shouldAdvance) {
     return session; // no-op guard, shouldn't normally be called this way
   }
   return {
+    ...session,
     current: decision.nextState,
     probeCountInCurrentState: 0,
   };
