@@ -2,6 +2,8 @@
 // The fixed sequence of interview states. Order matters — this list
 // doubles as the "what comes next" lookup for forced/normal advances.
 
+import type { SessionEvidence } from "./evidence.ts";
+
 export const INTERVIEW_STATES = [
   "problem-intro",
   "clarifying-questions",
@@ -30,4 +32,5 @@ export type TransitionReason =
 export interface SessionState {
   current: InterviewState;
   probeCountInCurrentState: number;
+  evidence: SessionEvidence;
 }
