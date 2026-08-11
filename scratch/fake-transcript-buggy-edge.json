@@ -1,0 +1,25 @@
+{
+  "problemId": "valid-parentheses",
+  "transcript": [
+    { "speaker": "interviewer", "state": "problem-intro", "text": "Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if it's valid. Every open bracket must be closed by the same type of bracket, in the correct order. String length is between 1 and 10^4, and the string only ever contains those bracket characters." },
+    { "speaker": "candidate", "state": "clarifying-questions", "text": "So every opening bracket needs a matching closing bracket of the same type, in the right nested order. I'll use a stack." },
+    { "speaker": "interviewer", "state": "clarifying-questions", "text": "Sounds good, go ahead." },
+    { "speaker": "candidate", "state": "coding", "text": "I'll push opening brackets onto a stack, and for closing brackets, I'll pop and check the stack isn't empty." },
+    { "speaker": "candidate", "state": "coding", "text": "def solution(s):\n    stack = []\n    opens = '([{'\n    closes = ')]}'\n    for char in s:\n        if char in opens:\n            stack.append(char)\n        elif char in closes:\n            if not stack:\n                return False\n            stack.pop()\n    return len(stack) == 0" },
+    { "speaker": "interviewer", "state": "testing-debugging", "text": "Let's run it." },
+    { "speaker": "candidate", "state": "testing-debugging", "text": "This handles the edge case of mismatched bracket types correctly, since I'm checking against the opens and closes sets before popping." },
+    { "speaker": "interviewer", "state": "complexity-discussion", "text": "What's the time and space complexity?" },
+    { "speaker": "candidate", "state": "complexity-discussion", "text": "Time is O(n), one pass through the string. Space is O(n) worst case if it's all opening brackets." },
+    { "speaker": "interviewer", "state": "wrap-up", "text": "Anything you'd change?" },
+    { "speaker": "candidate", "state": "wrap-up", "text": "No, I think this correctly handles all the edge cases including mismatched types." }
+  ],
+  "executionResults": [
+    { "testCaseId": "core-1", "tag": "core", "passed": true },
+    { "testCaseId": "core-2", "tag": "core", "passed": true },
+    { "testCaseId": "core-3", "tag": "core", "passed": true },
+    { "testCaseId": "edge-1", "tag": "edge", "passed": true },
+    { "testCaseId": "edge-2", "tag": "edge", "passed": true },
+    { "testCaseId": "edge-3", "tag": "edge", "passed": false },
+    { "testCaseId": "edge-4", "tag": "edge", "passed": false }
+  ]
+}
