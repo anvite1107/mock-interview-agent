@@ -20,9 +20,15 @@ export type InterviewState = typeof INTERVIEW_STATES[number];
 //
 // problem-intro and wrap-up don't need one: problem-intro advances on any
 // candidate message, and wrap-up is terminal. testing-debugging is
-// deliberately left uncapped — a candidate whose core tests never pass and
-// who never says they're moving on will stall there indefinitely. Known
-// and accepted; revisit once the CLI surfaces real stall behavior.
+// deliberately and permanently uncapped — its judged branch already covers
+// the realistic exit (see judgeAdvance.ts's readiness description: the
+// candidate gives up on failing tests and says they're moving on), so a
+// cap would only fire in cases that don't happen. Settled, not deferred.
+//
+// The one path this leaves open is infrastructural, not behavioral:
+// detectJudgedAdvance is fail-safe and returns false on API error, so
+// sustained Gemini failures during testing-debugging stall the session
+// with no cap as backstop. Accepted.
 //
 // IMPORTANT: these are cap values, not probe counts. handleProbeTurn.ts
 // declines to probe on the turn that would reach the cap (force-advancing
