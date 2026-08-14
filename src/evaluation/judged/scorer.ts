@@ -5,11 +5,25 @@ import type { SessionEvidence } from "../../engine/evidence.ts";
 import type { RubricConfig } from "../../rubric/schema.ts";
 import type { Problem } from "../../../problem-bank/schema.ts";
 
-function stripJsonFences(text: string): string {
+/** The subset of Gemini's generateContent response this module reads.
+ *  Deliberately all-optional: it describes what we look for, not what the
+ *  API guarantees. Missing fields are caught by explicit runtime throws
+ *  in callGemini rather than by the type. */
+interface GeminiGenerateContentResponse {
+  candidates?: Array<{
+    finishReason?: string;
+    content?: { parts?: Array<{ text?: string }> };
+  }>;
+}
+
+// Exported so the mid-session callers (advance-detection, probe-generation)
+// reuse the same defensive strip rather than each deciding whether Gemini's
+// JSON mode can be trusted to omit fences.
+export function stripJsonFences(text: string): string {
   return text.replace(/```json|```/g, "").trim();
 }
 
-async function callGemini(
+export async function callGemini(
   systemPrompt: string,
   userMessage: string
 ): Promise<string> {
@@ -49,7 +63,11 @@ async function callGemini(
     throw new Error(`Gemini API error ${response.status}: ${errText}`);
   }
 
-  const data = await response.json();
+  // response.json() is typed `Promise<unknown>`, so the shape has to be
+  // asserted before any field access. Every field is optional and the
+  // guards below do the real validation — this only describes the subset
+  // of Gemini's response we actually read, it doesn't assume it's present.
+  const data = (await response.json()) as GeminiGenerateContentResponse;
 
   const candidate = data.candidates?.[0];
   if (!candidate) {

@@ -1,6 +1,6 @@
 // decision policy, probe caps
 import { SessionState, InterviewState, TransitionReason, INTERVIEW_STATES } from "./states.ts";
-import { evaluateTransition, applyTransition, recordProbe } from "./policy.ts";
+import { evaluateTransition, applyTransition, recordProbe, getNextState } from "./policy.ts";
 import {
   SessionEvidence,
   TranscriptEntry,
@@ -88,6 +88,52 @@ export function handleTurn(session: SessionState, input: TurnInput): TurnResult 
   }
 
   return { session: workingSession, transitioned: false, reason: null, fromState, toState: null };
+}
+
+// Advances the session WITHOUT recording a transcript entry.
+//
+// handleTurn conflates two things that are usually the same event: "someone
+// said something" and "the state may now change." A probe declined at the
+// cap boundary is a state change with no utterance — there is nothing to
+// put in the transcript — so it can't go through handleTurn without
+// fabricating a turn that never happened.
+//
+// Transition logging stays here rather than in policy.ts or the caller,
+// matching handleTurn above: policy.ts decides, stateMachine.ts records.
+// No-ops (transitioned: false) if already terminal.
+export function forceAdvance(
+  session: SessionState,
+  reason: TransitionReason
+): TurnResult {
+  const fromState = session.current;
+  const nextState = getNextState(fromState);
+
+  if (nextState === null) {
+    return { session, transitioned: false, reason: null, fromState, toState: null };
+  }
+
+  const advanced = applyTransition(session, {
+    shouldAdvance: true,
+    reason,
+    nextState,
+  });
+
+  return {
+    session: {
+      ...advanced,
+      evidence: {
+        ...advanced.evidence,
+        transitionLog: [
+          ...advanced.evidence.transitionLog,
+          { from: fromState, to: nextState, reason },
+        ],
+      },
+    },
+    transitioned: true,
+    reason,
+    fromState,
+    toState: nextState,
+  };
 }
 
 export function isTerminal(session: SessionState): boolean {

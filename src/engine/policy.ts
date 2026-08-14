@@ -8,7 +8,10 @@ export type ProbeDecision =
 
 // Looks up the state that comes after `current` in the fixed sequence.
 // Returns null if `current` is the terminal state (wrap-up).
-function getNextState(current: InterviewState): InterviewState | null {
+// Exported for stateMachine.ts's forceAdvance — this file stays the single
+// owner of "what comes next", even for transitions that bypass
+// evaluateTransition.
+export function getNextState(current: InterviewState): InterviewState | null {
   const index = INTERVIEW_STATES.indexOf(current);
   const next = INTERVIEW_STATES[index + 1];
   return next ?? null;

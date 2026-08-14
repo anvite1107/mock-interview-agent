@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { createSession, handleTurn, isTerminal } from "../../src/engine/stateMachine.ts";
 import type { SessionState } from "../../src/engine/states.ts";
+import { PROBE_CAPS } from "../../src/engine/states.ts";
 import { createEmptyEvidence } from "../../src/engine/evidence.ts";
 import type { TestCaseResult } from "../../src/engine/evidence.ts";
 
@@ -66,9 +67,12 @@ describe("handleTurn — probe cap exceeded, same turn", () => {
   it("force-advances on the turn the cap is reached, not the turn after", () => {
     const session: SessionState = {
       current: "coding",
-      probeCountInCurrentState: 1,
+      // Derived from PROBE_CAPS, not hardcoded — this test is about
+      // handleTurn's ordering (recordProbe before the cap check), not about
+      // any particular cap value.
+      probeCountInCurrentState: PROBE_CAPS["coding"]! - 1,
       evidence: createEmptyEvidence(),
-    }; // one below cap of 2
+    };
     const result = handleTurn(session, {
       candidateTriggeredAdvance: false,
       wasProbe: true,
@@ -292,9 +296,9 @@ describe("handleTurn — evidence: transitionLog", () => {
   it("logs a transitionLog entry with from/to/reason when a transition occurs", () => {
     const session: SessionState = {
       current: "coding",
-      probeCountInCurrentState: 1,
+      probeCountInCurrentState: PROBE_CAPS["coding"]! - 1,
       evidence: createEmptyEvidence(),
-    }; // one below cap of 2
+    };
     const result = handleTurn(session, {
       candidateTriggeredAdvance: false,
       wasProbe: true,
