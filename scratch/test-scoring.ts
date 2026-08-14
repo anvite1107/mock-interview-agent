@@ -158,7 +158,16 @@ async function callGemini(
     throw new Error(`API error ${response.status}: ${errText}`);
   }
 
-  const data = await response.json();
+  // response.json() is typed Promise<unknown>, so the shape has to be
+  // asserted before any field access. Same all-optional subset that
+  // src/evaluation/judged/scorer.ts declares — the guards below do the
+  // real validation, this only describes what we read.
+  const data = (await response.json()) as {
+    candidates?: Array<{
+      finishReason?: string;
+      content?: { parts?: Array<{ text?: string }> };
+    }>;
+  };
 
   const candidate = data.candidates?.[0];
   if (!candidate) {
