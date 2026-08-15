@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "brute-force-then-optimizes",
+  "problemId": "container-with-most-water",
+  "notes": "Submits a correct O(n^2) double loop and passes every test. Then describes the two-pointer optimization accurately and in detail \u2014 but never writes it. When stating complexity, gives O(n) for the two-pointer approach they did not implement, as though it were the complexity of the submitted code.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "The area between two lines is the shorter of the two heights times the distance between them. I want the maximum over all pairs."
+    },
+    {
+      "kind": "say",
+      "text": "Can I assume there are at least two lines in the input?"
+    },
+    {
+      "kind": "say",
+      "text": "Let me get the brute force down first so I have something correct, then optimize. Every pair, track the max. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "brute-force-then-optimizes.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "All passing. Now the optimization: start a pointer at each end, and always move the one pointing at the shorter line inward. The reason that's safe is that the shorter line caps the area for every pair it's part of \u2014 moving the taller pointer in can only shrink the width without ever raising the height, so you can't lose the optimum by discarding it. That gets you one pass. I'll leave the code as it is though \u2014 let's move on."
+    },
+    {
+      "kind": "say",
+      "text": "It's O(n) time \u2014 each pointer moves inward and they meet in the middle, so every index is visited once. O(1) space, just the two pointers and the running max."
+    }
+  ]
+}

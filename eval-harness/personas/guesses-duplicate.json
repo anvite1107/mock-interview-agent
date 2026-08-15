@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "guesses-duplicate",
+  "problemId": "find-the-duplicate-number",
+  "notes": "Sorts the array and scans for adjacent equals. Passes every single test case, so execution evidence is spotless \u2014 but the problem asks for O(1) space and this both sorts in O(n log n) and mutates the caller's array. Claims O(n) time and O(1) space anyway. The deliberate case where a clean test run and a poor solution coexist.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Find the one number that appears more than once."
+    },
+    {
+      "kind": "say",
+      "text": "Are there any constraints on how I solve it, or is anything fair game?"
+    },
+    {
+      "kind": "say",
+      "text": "I'll sort it and then walk the array looking for two equal neighbours. That's the simplest thing that works \u2014 I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "guesses-duplicate.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "Everything passes, including the case where the duplicate appears many times over. I'm done with it, let's move on."
+    },
+    {
+      "kind": "say",
+      "text": "Time is O(n) \u2014 I do one pass over the array after sorting. Space is O(1), I'm not allocating anything, it's all in place."
+    }
+  ]
+}

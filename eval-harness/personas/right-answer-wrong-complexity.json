@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "right-answer-wrong-complexity",
+  "problemId": "longest-substring-without-repeating-characters",
+  "notes": "Writes a correct sliding window with a last-seen map on the first try, including the guard that keeps the window start from moving backwards. Passes everything. Then analyzes complexity by counting nested-looking work and concludes O(n^2), reasoning that the start pointer 'scans back' \u2014 it does not. Confident and wrong.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Longest substring with all distinct characters. Substring meaning contiguous, not subsequence \u2014 checking that."
+    },
+    {
+      "kind": "say",
+      "text": "Contiguous, good. What's the character set \u2014 ASCII, or should I assume arbitrary Unicode?"
+    },
+    {
+      "kind": "say",
+      "text": "I'll use a sliding window with a map from character to its last index. When I hit a repeat that's inside the current window, I jump the start to just past the previous occurrence. The guard matters: if the previous occurrence is already behind the start, I leave the start alone, otherwise the window can move backwards. No further questions \u2014 I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "right-answer-wrong-complexity.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "All passing, including 'dvdf', which is the one that catches a window moving backwards. I'm done, let's move on."
+    },
+    {
+      "kind": "say",
+      "text": "For complexity \u2014 the outer loop is over the string, but the start pointer also scans back through the window each time it moves, so I'd call it O(n^2) worst case. Space is O(min(n, m)) for the map, bounded by the alphabet size."
+    }
+  ]
+}

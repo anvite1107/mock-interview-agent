@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "careful-k-group",
+  "problemId": "reverse-nodes-in-k-group",
+  "notes": "Hard problem handled calmly. Counts the list length up front so a trailing partial group is provably left alone rather than handled by trial and error. Uses a dummy head and explains why. Correct first submission, accurate O(1) space claim.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Reversing every k consecutive nodes, and any leftover tail shorter than k stays as it is. Is k guaranteed to be at least 1, and should I reverse in place rather than allocating new nodes?"
+    },
+    {
+      "kind": "say",
+      "text": "In place with O(1) extra space, then. The part I want to be careful about is the trailing partial group \u2014 I don't want to reverse it and then undo it. I'll count the list length first so I know exactly how many full groups there are."
+    },
+    {
+      "kind": "say",
+      "text": "I'll also use a dummy node in front of the head, because the first group's reversal changes what the head is, and a dummy saves me from special-casing that. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "careful-k-group.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "All passing \u2014 including k equal to 1, which my early return handles, and the case where the list length is an exact multiple of k so there's no tail at all. I'm done with the code, happy to move on."
+    },
+    {
+      "kind": "say",
+      "text": "Time is O(n): the counting pass is one traversal and the reversal touches each node exactly once more, so 2n, which is O(n). Space is O(1) \u2014 the dummy node and a handful of pointers, no recursion and no extra list."
+    }
+  ]
+}

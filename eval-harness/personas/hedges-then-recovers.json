@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "hedges-then-recovers",
+  "problemId": "two-sum",
+  "notes": "Hedges constantly \u2014 'I think', 'maybe', 'does that sound right'. First submission is a nested loop whose inner index starts at i, so an element can pair with itself; one core and two edge tests fail. Reads the failure output carefully, diagnoses it correctly without help, and rewrites as a hash map that passes everything. Complexity statement is correct but tentative.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Ok so, I think this is the classic two-sum? Return indices, not the values themselves \u2014 I want to make sure I'm reading that right."
+    },
+    {
+      "kind": "say",
+      "text": "Indices, right. And I guess there's always exactly one answer, so I don't need to worry about ties?"
+    },
+    {
+      "kind": "say",
+      "text": "Maybe I'll just start with the straightforward nested loop and see where that gets me. I know it's not optimal but I'd rather have something working. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "hedges-then-recovers.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "Hm, that's not right. core-2 gave me [0, 0] for [3, 2, 4] with target 6 \u2014 it used the 3 twice. My inner loop starts at i instead of i + 1, so an element can pair with itself. Same root cause on the [3, 3] and [0, 4, 3, 0] edge cases."
+    },
+    {
+      "kind": "say",
+      "text": "Rather than just bump the inner index, let me do the hash map version \u2014 one pass, and if I check for the complement before inserting the current value, the self-pairing problem can't happen at all. That feels like the more robust fix."
+    },
+    {
+      "kind": "code",
+      "file": "hedges-then-recovers.v2.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "That's everything passing now, including the duplicate-zeros case that broke the first attempt. I'm happy with that, we can move on."
+    },
+    {
+      "kind": "say",
+      "text": "I think it's O(n) time? One pass, and dictionary lookups are constant on average. And O(n) space for the map. Does that sound right?"
+    }
+  ]
+}

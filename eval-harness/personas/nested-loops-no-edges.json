@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "nested-loops-no-edges",
+  "problemId": "subarray-sum-equals-k",
+  "notes": "Goes straight to a double loop with no discussion. Breaks out of the inner loop on the first match from each start index, so overlapping subarrays from the same start are undercounted \u2014 one core and one edge test fail. Shown the failures, does not engage with them and chooses to move on. Complexity statement is a guess.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Ok, subarrays summing to k."
+    },
+    {
+      "kind": "say",
+      "text": "No questions. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "nested-loops-no-edges.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "Some of those are failing but I'm not sure why, the logic looks right to me."
+    },
+    {
+      "kind": "say",
+      "text": "I don't think I'm going to get to the bottom of it, let's move on."
+    },
+    {
+      "kind": "say",
+      "text": "It's two nested loops so probably O(n^2)? And O(1) space I think, I'm not storing anything."
+    }
+  ]
+}

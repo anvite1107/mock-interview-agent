@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "gives-up-on-water",
+  "problemId": "container-with-most-water",
+  "notes": "Never gets to code. Asks increasingly unfocused clarifying questions, confuses the problem with the rain-water trapping problem, and quits during the clarifying stage. Produces a session with a transcript but no submission at all \u2014 the corpus's test of what the scoring pipeline does with zero execution evidence.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "So this is the one where you compute how much water gets trapped between the bars, right?"
+    },
+    {
+      "kind": "say",
+      "text": "Oh \u2014 just two lines, not the whole skyline. Hm. So the water between them isn't blocked by anything in between?"
+    },
+    {
+      "kind": "say",
+      "text": "I think I'm confusing this with a different problem and I'm not going to be useful here. Sorry."
+    },
+    {
+      "kind": "quit"
+    }
+  ]
+}

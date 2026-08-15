@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "misreads-problem-parens",
+  "problemId": "valid-parentheses",
+  "notes": "Reads the problem as pure balance counting and never registers that bracket types have to match. Asks no clarifying questions. Fails the mismatched-type core case and the interleaved edge case. When the failures come back, misdiagnoses them as an ordering issue rather than a type-matching one, and moves on without fixing anything.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "So I just need to check the brackets are balanced."
+    },
+    {
+      "kind": "say",
+      "text": "Nothing to clarify, it's a counting problem. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "misreads-problem-parens.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "core-3 is failing on '(]' \u2014 I get true and it wants false. That's odd, the counts balance out there."
+    },
+    {
+      "kind": "say",
+      "text": "Maybe it cares about the order somehow. I'm not sure how to handle that, I'll leave it and move on."
+    },
+    {
+      "kind": "say",
+      "text": "O(n) time since it's one loop over the string. Space is O(1)."
+    }
+  ]
+}

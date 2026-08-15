@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "silent-but-correct-parens",
+  "problemId": "valid-parentheses",
+  "notes": "Writes a flawless stack solution and says almost nothing about it. Answers questions in three or four words. Gives complexity only when asked directly, and even then without elaboration. The interesting case: execution evidence is perfect while there is barely any narration to score.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Ok."
+    },
+    {
+      "kind": "say",
+      "text": "No questions. Ready to code."
+    },
+    {
+      "kind": "code",
+      "file": "silent-but-correct-parens.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "Yeah, that's it. Done."
+    },
+    {
+      "kind": "say",
+      "text": "O(n) time, O(n) space."
+    }
+  ]
+}

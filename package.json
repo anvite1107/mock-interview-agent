@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "interview": "tsx --env-file-if-exists=.env src/cli/index.ts interview",
+    "replay": "tsx --env-file-if-exists=.env src/cli/index.ts replay",
     "label": "tsx --env-file-if-exists=.env src/cli/index.ts label",
     "score": "tsx --env-file-if-exists=.env src/cli/index.ts score"
   },

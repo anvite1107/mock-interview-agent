@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "precise-prefix-sums",
+  "problemId": "subarray-sum-equals-k",
+  "notes": "Immediately identifies that negatives rule out a sliding window and says so before proposing prefix sums. Seeds the prefix map with {0: 1} and explains what that entry represents. Correct first try, accurate complexity.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Counting contiguous subarrays that sum to k. First question: can the array contain negative numbers?"
+    },
+    {
+      "kind": "say",
+      "text": "Then a sliding window is out \u2014 with negatives the running sum isn't monotonic, so there's no valid shrink condition. I'll go with prefix sums in a hash map: for each running sum, count how many earlier prefixes equal running - k."
+    },
+    {
+      "kind": "say",
+      "text": "One detail I want to get right is seeding the map with {0: 1}. That entry stands for the empty prefix, and it's what lets a subarray starting at index 0 be counted. No more questions, I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "precise-prefix-sums.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "All passing, including the all-zeros case, which is the one I'd expect to break a naive version \u2014 it wants 6, not 3, because overlapping subarrays each count. I'm satisfied with this \u2014 let's move on."
+    },
+    {
+      "kind": "say",
+      "text": "O(n) time, single pass with O(1) expected work per element. O(n) space for the prefix-count map, since in the worst case every prefix sum is distinct."
+    }
+  ]
+}

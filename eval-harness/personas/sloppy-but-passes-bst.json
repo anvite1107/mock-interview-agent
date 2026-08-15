@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "sloppy-but-passes-bst",
+  "problemId": "validate-binary-search-tree",
+  "notes": "Correct min/max bounds solution, passes every test including the duplicate and deep-violation cases. But the verbal explanation is muddled \u2014 describes it as 'checking each node against its parent', which is the classic wrong approach, even though the code they wrote does not do that. Says space is O(1) despite the recursion.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Validating a BST. Left subtree strictly less, right subtree strictly greater, and it has to hold for the whole subtree not just the immediate children."
+    },
+    {
+      "kind": "say",
+      "text": "Are duplicate values allowed anywhere in the tree?"
+    },
+    {
+      "kind": "say",
+      "text": "No duplicates, so strict inequalities. I'll recurse and check each node against its parent, passing bounds down. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "sloppy-but-passes-bst.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "Everything passes. The one with 6 under 15 on the right of 10 is the case that gets you if you only compare against the parent, and that comes out false correctly. I'm happy with it, let's move on."
+    },
+    {
+      "kind": "say",
+      "text": "Time is O(n) since I visit every node once. Space is O(1) \u2014 I'm not building anything, just passing two numbers down."
+    }
+  ]
+}

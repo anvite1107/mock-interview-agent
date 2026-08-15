@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "crisp-hashmap-two-sum",
+  "problemId": "two-sum",
+  "notes": "Restates the problem in their own words before asking anything. Asks two targeted clarifying questions, then commits. Writes the hash-map solution in one pass and narrates the complement trick while doing it. Volunteers both time and space complexity unprompted, and names the space tradeoff against the brute-force version.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Let me make sure I have this. I'm given an array of integers and a target, and I return the indices of the two numbers that add to the target. Exactly one valid answer."
+    },
+    {
+      "kind": "say",
+      "text": "Two things: can the same element be used twice, and can the numbers be negative?"
+    },
+    {
+      "kind": "say",
+      "text": "Got it \u2014 distinct indices, and negatives are in play. Then I don't want to assume anything about ordering. I'll use a hash map from value to index and check for the complement as I go. One pass. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "crisp-hashmap-two-sum.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "All passing. The complement check happens before I insert the current value, which is what keeps an element from pairing with itself \u2014 that's the case I'd have gotten wrong with a naive version. I'm happy with this solution \u2014 let's move on."
+    },
+    {
+      "kind": "say",
+      "text": "Time is O(n): one pass, and dictionary lookups are O(1) on average. Space is O(n) for the map in the worst case where no pair exists until the very end. The brute force would be O(n^2) time and O(1) space, so this is the usual time-for-space trade."
+    }
+  ]
+}

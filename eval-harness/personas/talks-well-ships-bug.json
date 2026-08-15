@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "talks-well-ships-bug",
+  "problemId": "best-time-to-buy-and-sell-stock",
+  "notes": "Excellent narration throughout \u2014 clear about the running-minimum idea and why it works. Ships a version that seeds the best profit from the first two days, so it can return a negative profit and crashes on a single-day input. All core tests pass, two edge tests fail. Never notices, because the core results look clean, and moves straight to complexity.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "One buy and one sell, and the sell has to come after the buy. So for every day I want the best price I could have bought at on any earlier day."
+    },
+    {
+      "kind": "say",
+      "text": "Is the price list guaranteed non-empty, and can I assume prices are non-negative?"
+    },
+    {
+      "kind": "say",
+      "text": "The insight is that I don't need to look backwards at all \u2014 I can carry the minimum price seen so far as I sweep left to right, and at each day ask what profit I'd make selling today. That turns the O(n^2) pairwise scan into one pass. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "talks-well-ships-bug.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "Core cases all pass, so the running-minimum logic is doing what I expected. I'm satisfied with it, let's move on."
+    },
+    {
+      "kind": "say",
+      "text": "Time is O(n), a single pass with constant work per day. Space is O(1) \u2014 I'm only carrying the running minimum and the best profit, no extra structures."
+    }
+  ]
+}

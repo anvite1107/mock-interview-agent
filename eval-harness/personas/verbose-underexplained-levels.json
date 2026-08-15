@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "verbose-underexplained-levels",
+  "problemId": "binary-tree-level-order-traversal",
+  "notes": "Talks a great deal without saying much. Long preamble about how they like to approach tree problems generally, restates the prompt twice, uses 'basically' and 'essentially' as load-bearing words. The code is a clean correct BFS that passes everything, but almost none of the talking explains it \u2014 the level-size snapshot, the one genuinely subtle part, goes unmentioned.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Ok so, tree problems. I always like to think about whether it's a DFS or a BFS shape of problem first, that's basically my starting point with anything tree-shaped, because the traversal order kind of falls out of that decision."
+    },
+    {
+      "kind": "say",
+      "text": "So essentially what we're doing here is going level by level, and each level is its own list in the output, which is basically a level order traversal, which is essentially BFS. Is the tree guaranteed to be binary?"
+    },
+    {
+      "kind": "say",
+      "text": "Right, binary, so at most two children. I'm going to use a queue for this, which is the standard thing for BFS, and then essentially just collect the values as I go. So yeah, I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "verbose-underexplained-levels.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "Great, so that's all passing, which is basically what I expected because it's a pretty standard traversal at the end of the day. So yeah, I'm done, we can move on."
+    },
+    {
+      "kind": "say",
+      "text": "Complexity-wise it's O(n) because you're basically visiting every node one time, and the space is also O(n) essentially because of the queue."
+    }
+  ]
+}

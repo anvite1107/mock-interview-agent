@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "off-by-one-stock",
+  "problemId": "best-time-to-buy-and-sell-stock",
+  "notes": "Writes a double loop with the buy and sell indices the wrong way round \u2014 sells before it buys. Every core test fails. Reads the failures as a problem with the test cases rather than with the code, tries nothing, and asks to move on. States complexity confidently and incorrectly.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Buy low sell high, so I want the biggest difference in the array."
+    },
+    {
+      "kind": "say",
+      "text": "No questions."
+    },
+    {
+      "kind": "say",
+      "text": "I'll do every pair and take the largest difference. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "off-by-one-stock.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "That's failing most of them. For [7, 1, 5, 3, 6, 4] I get 6 and it wants 5, but 7 minus 1 is 6, so I'm not sure the expected value is right there."
+    },
+    {
+      "kind": "say",
+      "text": "I'd rather not spend more time on it. Can we move on?"
+    },
+    {
+      "kind": "say",
+      "text": "O(n) time. Space is O(1)."
+    }
+  ]
+}

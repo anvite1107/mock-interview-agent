@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "methodical-islands",
+  "problemId": "number-of-islands",
+  "notes": "Asks about grid mutation and diagonal adjacency before writing anything. Chooses BFS with a visited set specifically to avoid mutating the caller's grid, and says why. Correct on the first submission. States complexity in terms of both grid dimensions rather than a vague 'linear'.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "So I'm counting connected components of '1' cells in a character grid."
+    },
+    {
+      "kind": "say",
+      "text": "Two questions before I start: is adjacency four-directional or does diagonal count, and am I allowed to mutate the input grid?"
+    },
+    {
+      "kind": "say",
+      "text": "Four-directional, and I'd rather not mutate the input even if I'm allowed to \u2014 a scoring function that destroys its argument is a nasty surprise for the caller. I'll keep a visited set instead. BFS from each unvisited land cell. That's my plan \u2014 I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "methodical-islands.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "All green, including the all-water and single-cell grids. I'm done here, happy to move on."
+    },
+    {
+      "kind": "say",
+      "text": "Time is O(m * n) \u2014 every cell is enqueued at most once because I mark it visited at enqueue time, not at dequeue time. Space is O(m * n) too, for the visited set plus the queue in the worst case where the whole grid is one island."
+    }
+  ]
+}

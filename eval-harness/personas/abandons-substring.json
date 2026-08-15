@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "abandons-substring",
+  "problemId": "longest-substring-without-repeating-characters",
+  "notes": "Describes a sliding window correctly out loud, then writes something else entirely \u2014 counts distinct characters across the whole string, ignoring windows. One core test fails. Recognizes the code does not match what they described, gets frustrated, and quits in testing-debugging.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Longest run of characters with no repeats. Contiguous, right?"
+    },
+    {
+      "kind": "say",
+      "text": "Contiguous. I think this is a two-pointer sliding window \u2014 expand the right edge, and when you hit a duplicate pull the left edge past the previous occurrence. No questions, I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "abandons-substring.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "'pwwkew' comes back 4 and it should be 3. Looking at what I actually wrote, I'm counting distinct characters in the entire string, not in a window \u2014 that isn't the algorithm I just described at all."
+    },
+    {
+      "kind": "quit"
+    }
+  ]
+}

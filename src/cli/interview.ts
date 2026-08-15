@@ -8,9 +8,7 @@
 // a separate command on purpose, so a session can be labeled by hand
 // before anyone has seen what the agent thought.
 
-import { createInterface } from "node:readline/promises";
-import { once } from "node:events";
-import { stdin, stdout } from "node:process";
+import { stdout } from "node:process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { loadProblems } from "../../problem-bank/loadProblems.ts";
 import type { Problem } from "../../problem-bank/schema.ts";
@@ -20,10 +18,11 @@ import { handleProbeTurn } from "../engine/handleProbeTurn.ts";
 import type { SessionState } from "../engine/states.ts";
 import type { TestCaseResult } from "../engine/evidence.ts";
 import { runSubmission, type ExecutionResult } from "../execution/harness.ts";
-import { nextRunId, pathsFor, createRunDir, writeSession } from "../session/store.ts";
+import { nextRunId, pathsFor, createRunDir, writeSession, type SessionPaths } from "../session/store.ts";
 import type { SavedSession, Submission } from "../session/schema.ts";
 import { SESSION_SCHEMA_VERSION } from "../session/schema.ts";
 import { parseCommand, HELP_TEXT } from "./commands.ts";
+import { createInteractiveTurnSource, type TurnSource } from "./turnSource.ts";
 import {
   formatExecutionSummary,
   formatProblemIntro,
@@ -52,25 +51,6 @@ function toExecutionDetails(results: ExecutionResult[]) {
     error: r.error ?? null,
     executionTimeMs: r.executionTimeMs,
   }));
-}
-
-/**
- * Reads one line, or null if the input closed.
- *
- * rl.question() does NOT reject when readline closes — its promise simply
- * never settles. Awaiting it bare means that on Ctrl-D (or any piped
- * stdin reaching EOF) the loop parks forever, node finds an empty event
- * loop, and the process exits 0 having silently discarded the session.
- * Racing the close event turns that into an ordinary end-of-input.
- */
-async function askOrNull(
-  rl: ReturnType<typeof createInterface>,
-  prompt: string
-): Promise<string | null> {
-  return Promise.race([
-    rl.question(prompt),
-    once(rl, "close").then(() => null),
-  ]);
 }
 
 function seedCandidateFile(problem: Problem, path: string): void {
@@ -102,7 +82,16 @@ function pickProblem(problems: Map<string, Problem>, requestedId: string | undef
   return problems.get(ids[Math.floor(Math.random() * ids.length)]!)!;
 }
 
-export async function runInterview(options: { problemId?: string } = {}): Promise<void> {
+export interface InterviewOptions {
+  problemId?: string;
+  /** Where candidate turns come from. Defaults to a person at a terminal.
+   *  Takes the candidate file path because a scripted source writes code
+   *  into it before emitting /submit — the same thing a human does in their
+   *  editor, minus the editor. */
+  makeTurnSource?: (candidateFilePath: string) => TurnSource;
+}
+
+export async function runInterview(options: InterviewOptions = {}): Promise<SessionPaths> {
   const problems = loadProblems();
   const problem = pickProblem(problems, options.problemId);
 
@@ -124,7 +113,10 @@ export async function runInterview(options: { problemId?: string } = {}): Promis
     text: intro,
   }).session;
 
-  const rl = createInterface({ input: stdin, output: stdout });
+  const turnSource =
+    options.makeTurnSource !== undefined
+      ? options.makeTurnSource(paths.candidateFile)
+      : createInteractiveTurnSource();
 
   stdout.write(`\n${paths.runId}\n`);
   stdout.write(formatStageBanner("problem-intro", false));
@@ -137,9 +129,10 @@ export async function runInterview(options: { problemId?: string } = {}): Promis
 
   try {
     while (!isTerminal(session) && !quitEarly) {
-      const raw = await askOrNull(rl, "candidate> ");
+      const raw = await turnSource.next();
       if (raw === null) {
-        // Ctrl-D or end of piped input. An ordinary early quit, not an error.
+        // Ctrl-D, end of piped input, or a persona script that ran out of
+        // turns. An ordinary early quit, not an error.
         quitEarly = true;
         break;
       }
@@ -253,7 +246,7 @@ export async function runInterview(options: { problemId?: string } = {}): Promis
     // and an abandoned transcript is still valid eval data.
     fatalError = err;
   } finally {
-    rl.close();
+    turnSource.close();
   }
 
   const saved: SavedSession = {
@@ -272,8 +265,15 @@ export async function runInterview(options: { problemId?: string } = {}): Promis
   writeSession(saved, paths);
 
   stdout.write(`  Saved ${paths.sessionFile}\n`);
-  stdout.write(`  Next: npm run label ${paths.runId}   (before you look at agent scores)\n`);
-  stdout.write(`        npm run score ${paths.runId}\n\n`);
+  // The what-next hint is for a person who just finished playing. A replay
+  // batch prints it once per persona otherwise, which buries the warnings
+  // that actually need reading.
+  if (options.makeTurnSource === undefined) {
+    stdout.write(`  Next: npm run label ${paths.runId}   (before you look at agent scores)\n`);
+    stdout.write(`        npm run score ${paths.runId}\n\n`);
+  }
 
   if (fatalError !== null) throw fatalError;
+
+  return paths;
 }

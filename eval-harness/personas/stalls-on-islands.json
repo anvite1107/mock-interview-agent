@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "stalls-on-islands",
+  "problemId": "number-of-islands",
+  "notes": "Submits code with a missing colon, so every test comes back a syntax error before anything runs. Fixes the syntax on the second attempt but the logic counts land cells rather than connected components, so most tests still fail. Quits during testing-debugging rather than attempting a flood fill.",
+  "turns": [
+    {
+      "kind": "say",
+      "text": "Counting islands in a grid."
+    },
+    {
+      "kind": "say",
+      "text": "Do diagonals connect?"
+    },
+    {
+      "kind": "say",
+      "text": "Ok, four directions only. I'm ready to start coding."
+    },
+    {
+      "kind": "code",
+      "file": "stalls-on-islands.v1.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "Syntax error, I dropped a colon on the for loop. One second."
+    },
+    {
+      "kind": "code",
+      "file": "stalls-on-islands.v2.py"
+    },
+    {
+      "kind": "submit"
+    },
+    {
+      "kind": "say",
+      "text": "It runs now but the numbers are way off \u2014 I'm counting every land cell instead of grouping them. I know I need some kind of traversal from each cell but I'm blanking on how to mark the ones I've already covered."
+    },
+    {
+      "kind": "quit"
+    }
+  ]
+}
