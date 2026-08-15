@@ -60,6 +60,23 @@ export function nextRunId(sessionsDir: string = SESSIONS_DIR): string {
   return `run-${String(highest + 1).padStart(3, "0")}`;
 }
 
+/**
+ * Every run directory that actually holds a session, oldest id first.
+ *
+ * Filters on session.json rather than on directory name: a run dir created
+ * by a crash before the first write is not a session, and batch commands
+ * shouldn't report it as a failure every time they run.
+ */
+export function listRuns(sessionsDir: string = SESSIONS_DIR): SessionPaths[] {
+  if (!existsSync(sessionsDir)) return [];
+
+  return readdirSync(sessionsDir, { withFileTypes: true })
+    .filter((e) => e.isDirectory() && /^run-\d+$/.test(e.name))
+    .map((e) => pathsFor(e.name, sessionsDir))
+    .filter((paths) => existsSync(paths.sessionFile))
+    .sort((a, b) => a.runId.localeCompare(b.runId));
+}
+
 export function createRunDir(paths: SessionPaths): void {
   mkdirSync(paths.dir, { recursive: true });
 }

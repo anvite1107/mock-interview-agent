@@ -11,7 +11,8 @@
 import { stdout } from "node:process";
 import { loadRubric } from "../rubric/loadRubric.ts";
 import { loadProblems } from "../../problem-bank/loadProblems.ts";
-import { resolveRun, readSession } from "../session/store.ts";
+import { resolveRun, readSession, listRuns, type SessionPaths } from "../session/store.ts";
+import { readGoldIfPresent, rubricDrift } from "../../eval-harness/loadGold.ts";
 import type { SavedSession } from "../session/schema.ts";
 import type { SessionEvidence, TestCaseResult } from "../engine/evidence.ts";
 import type { SessionState } from "../engine/states.ts";
@@ -46,8 +47,7 @@ function finalExecutionResults(session: SavedSession): TestCaseResult[] {
   }));
 }
 
-export async function runScore(runArg: string): Promise<void> {
-  const paths = resolveRun(runArg);
+async function scoreOne(paths: SessionPaths): Promise<void> {
   const saved = readSession(paths);
   const rubricConfig = loadRubric();
   const problem = loadProblems().get(saved.problemId);
@@ -56,6 +56,18 @@ export async function runScore(runArg: string): Promise<void> {
     throw new Error(
       `Session ${saved.runId} references problem "${saved.problemId}", which is no longer in the problem bank.`
     );
+  }
+
+  // Header first so that in batch mode the drift warning below appears
+  // under the run it belongs to rather than trailing the previous one.
+  stdout.write(`\n${saved.runId} — scoring with the judge...\n`);
+
+  // Checked before spending an API call, not after: if this run's labels
+  // are stale the resulting score can't be compared against them anyway.
+  const gold = readGoldIfPresent(paths.goldFile);
+  if (gold !== null) {
+    const drift = rubricDrift(gold, rubricConfig);
+    if (drift.drifted) stdout.write(`  Warning: ${drift.message}\n`);
   }
 
   const evidence: SessionEvidence = {
@@ -70,7 +82,6 @@ export async function runScore(runArg: string): Promise<void> {
     evidence,
   };
 
-  stdout.write(`\n${saved.runId} — scoring with the judge...\n`);
   const judged = await scoreSession(evidence, problem, rubricConfig);
   const aggregated = aggregateScores(judged, evidence, rubricConfig);
   const report = buildReport(sessionState, aggregated, problem, rubricConfig);
@@ -84,4 +95,43 @@ export async function runScore(runArg: string): Promise<void> {
   }
   stdout.write(`\n  Weighted total: ${report.scores.weightedTotal.toFixed(1)}/100\n`);
   stdout.write(`  Saved ${paths.reportFile}\n\n`);
+}
+
+/**
+ * Scores one run, or every run with `--all`.
+ *
+ * Batch exists for Day 19: tuning rubric anchors means re-scoring the whole
+ * corpus and re-running the agreement metric, which is only bearable as one
+ * command. Individual failures are collected rather than thrown — one
+ * malformed session shouldn't cost the other seventeen their API calls.
+ */
+export async function runScore(runArg: string): Promise<void> {
+  if (runArg !== "--all") {
+    await scoreOne(resolveRun(runArg));
+    return;
+  }
+
+  const runs = listRuns();
+  if (runs.length === 0) {
+    throw new Error("No sessions to score. Play or replay some first.");
+  }
+
+  const failures: Array<{ runId: string; message: string }> = [];
+
+  for (const paths of runs) {
+    try {
+      await scoreOne(paths);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      stdout.write(`  FAILED ${paths.runId}: ${message}\n\n`);
+      failures.push({ runId: paths.runId, message });
+    }
+  }
+
+  stdout.write("── Scoring complete ──\n");
+  stdout.write(`  ${runs.length - failures.length}/${runs.length} runs scored\n`);
+  for (const failure of failures) {
+    stdout.write(`  failed: ${failure.runId} — ${failure.message}\n`);
+  }
+  stdout.write("\n");
 }

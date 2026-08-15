@@ -14,7 +14,9 @@
     "interview": "tsx --env-file-if-exists=.env src/cli/index.ts interview",
     "replay": "tsx --env-file-if-exists=.env src/cli/index.ts replay",
     "label": "tsx --env-file-if-exists=.env src/cli/index.ts label",
-    "score": "tsx --env-file-if-exists=.env src/cli/index.ts score"
+    "label:order": "tsx eval-harness/labelOrder.ts",
+    "score": "tsx --env-file-if-exists=.env src/cli/index.ts score",
+    "eval": "tsx --env-file-if-exists=.env eval-harness/runEval.ts"
   },
   "repository": {
     "type": "git",
