@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-011",
+  "problemId": "best-time-to-buy-and-sell-stock",
+  "startedAt": "2026-08-15T09:22:28.826Z",
+  "endedAt": "2026-08-15T09:24:13.985Z",
+  "finalState": "wrap-up",
+  "completed": true,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Best Time to Buy and Sell Stock (easy)\n\nYou are given an array prices where prices[i] is the price of a stock on day i. You want to maximize profit by choosing a single day to buy and a different later day to sell. Return the maximum profit achievable, or 0 if no profit is possible.\n\nConstraints:\n  - 1 <= len(prices) <= 10^5\n  - 0 <= prices[i] <= 10^4\n\nWrite your solution as: def solution(prices: List[int]) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Buy low sell high, so I want the biggest difference in the array."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "No questions."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "What should the function return if the stock prices decrease every single day?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "I'll do every pair and take the largest difference. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(prices):\n    best = 0\n    for i in range(len(prices)):\n        for j in range(i + 1, len(prices)):\n            if prices[i] - prices[j] > best:\n                best = prices[i] - prices[j]\n    return best"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "That's failing most of them. For [7, 1, 5, 3, 6, 4] I get 6 and it wants 5, but 7 minus 1 is 6, so I'm not sure the expected value is right there."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "Can you walk through what the operations of buying and selling mean regarding the order of days in the problem description?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "I'd rather not spend more time on it. Can we move on?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "O(n) time. Space is O(1)."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 5,
+      "code": "def solution(prices):\n    best = 0\n    for i in range(len(prices)):\n        for j in range(i + 1, len(prices)):\n            if prices[i] - prices[j] > best:\n                best = prices[i] - prices[j]\n    return best\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": 6,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 5, got 6"
+          },
+          "executionTimeMs": 61
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": 0,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 4, got 0"
+          },
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": 3,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 2, got 3"
+          },
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": 6,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 0, got 6"
+          },
+          "executionTimeMs": 55
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": 2,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 4, got 2"
+          },
+          "executionTimeMs": 56
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "testing-debugging",
+      "to": "complexity-discussion",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "complexity-discussion",
+      "to": "wrap-up",
+      "reason": "candidate-action"
+    }
+  ]
+}

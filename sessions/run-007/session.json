@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-007",
+  "problemId": "two-sum",
+  "startedAt": "2026-08-15T09:16:13.884Z",
+  "endedAt": "2026-08-15T09:18:43.898Z",
+  "finalState": "wrap-up",
+  "completed": true,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Two Sum (easy)\n\nGiven an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`. You may assume that each input has exactly one solution, and you may not use the same element twice. Return the indices in ascending order.\n\nConstraints:\n  - 2 <= len(nums) <= 10^4\n  - -10^9 <= nums[i] <= 10^9\n  - -10^9 <= target <= 10^9\n  - Exactly one valid answer exists for each input\n\nWrite your solution as: def solution(nums: List[int], target: int) -> List[int]:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Ok so, I think this is the classic two-sum? Return indices, not the values themselves — I want to make sure I'm reading that right."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Indices, right. And I guess there's always exactly one answer, so I don't need to worry about ties?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "How would you like the two resulting indices to be ordered in your return value?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Maybe I'll just start with the straightforward nested loop and see where that gets me. I know it's not optimal but I'd rather have something working. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(nums, target):\n    for i in range(len(nums)):\n        for j in range(i, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Hm, that's not right. core-2 gave me [0, 0] for [3, 2, 4] with target 6 — it used the 3 twice. My inner loop starts at i instead of i + 1, so an element can pair with itself. Same root cause on the [3, 3] and [0, 4, 3, 0] edge cases."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "Now that you've addressed self-pairing, what other test cases are still failing and what do you think might be causing them?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Rather than just bump the inner index, let me do the hash map version — one pass, and if I check for the complement before inserting the current value, the self-pairing problem can't happen at all. That feels like the more robust fix."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "How does your new hash map approach behave when duplicate values appear in the input array?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "(submits code)\n\ndef solution(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        if target - n in seen:\n            return [seen[target - n], i]\n        seen[n] = i\n    return []"
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "That's everything passing now, including the duplicate-zeros case that broke the first attempt. I'm happy with that, we can move on."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "complexity-discussion",
+      "text": "Before we wrap up, could you walk me through the time and space complexity of the approach you just implemented?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "I think it's O(n) time? One pass, and dictionary lookups are constant on average. And O(n) space for the map. Does that sound right?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 5,
+      "code": "def solution(nums, target):\n    for i in range(len(nums)):\n        for j in range(i, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            0,
+            1
+          ],
+          "error": null,
+          "executionTimeMs": 59
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": [
+            0,
+            0
+          ],
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected [1,2], got [0,0]"
+          },
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            2,
+            3
+          ],
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": [
+            0,
+            0
+          ],
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected [0,1], got [0,0]"
+          },
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            2,
+            4
+          ],
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": [
+            0,
+            0
+          ],
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected [0,3], got [0,0]"
+          },
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            1,
+            2
+          ],
+          "error": null,
+          "executionTimeMs": 56
+        }
+      ]
+    },
+    {
+      "turnIndex": 10,
+      "code": "def solution(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        if target - n in seen:\n            return [seen[target - n], i]\n        seen[n] = i\n    return []\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            0,
+            1
+          ],
+          "error": null,
+          "executionTimeMs": 62
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            1,
+            2
+          ],
+          "error": null,
+          "executionTimeMs": 58
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            2,
+            3
+          ],
+          "error": null,
+          "executionTimeMs": 55
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            0,
+            1
+          ],
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            2,
+            4
+          ],
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            0,
+            3
+          ],
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            1,
+            2
+          ],
+          "error": null,
+          "executionTimeMs": 55
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "testing-debugging",
+      "to": "complexity-discussion",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "complexity-discussion",
+      "to": "wrap-up",
+      "reason": "candidate-action"
+    }
+  ]
+}

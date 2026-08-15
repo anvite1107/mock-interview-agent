@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-004",
+  "problemId": "two-sum",
+  "startedAt": "2026-08-15T09:12:43.830Z",
+  "endedAt": "2026-08-15T09:13:58.812Z",
+  "finalState": "wrap-up",
+  "completed": true,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Two Sum (easy)\n\nGiven an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`. You may assume that each input has exactly one solution, and you may not use the same element twice. Return the indices in ascending order.\n\nConstraints:\n  - 2 <= len(nums) <= 10^4\n  - -10^9 <= nums[i] <= 10^9\n  - -10^9 <= target <= 10^9\n  - Exactly one valid answer exists for each input\n\nWrite your solution as: def solution(nums: List[int], target: int) -> List[int]:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Let me make sure I have this. I'm given an array of integers and a target, and I return the indices of the two numbers that add to the target. Exactly one valid answer."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Two things: can the same element be used twice, and can the numbers be negative?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "Before we dive into the code, how would you like the returned indices to be ordered if there are multiple possible pairs?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Got it — distinct indices, and negatives are in play. Then I don't want to assume anything about ordering. I'll use a hash map from value to index and check for the complement as I go. One pass. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        if target - n in seen:\n            return [seen[target - n], i]\n        seen[n] = i\n    return []"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "All passing. The complement check happens before I insert the current value, which is what keeps an element from pairing with itself — that's the case I'd have gotten wrong with a naive version. I'm happy with this solution — let's move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "Time is O(n): one pass, and dictionary lookups are O(1) on average. Space is O(n) for the map in the worst case where no pair exists until the very end. The brute force would be O(n^2) time and O(1) space, so this is the usual time-for-space trade."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 5,
+      "code": "def solution(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        if target - n in seen:\n            return [seen[target - n], i]\n        seen[n] = i\n    return []\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            0,
+            1
+          ],
+          "error": null,
+          "executionTimeMs": 58
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            1,
+            2
+          ],
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            2,
+            3
+          ],
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            0,
+            1
+          ],
+          "error": null,
+          "executionTimeMs": 58
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            2,
+            4
+          ],
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            0,
+            3
+          ],
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            1,
+            2
+          ],
+          "error": null,
+          "executionTimeMs": 56
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "testing-debugging",
+      "to": "complexity-discussion",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "complexity-discussion",
+      "to": "wrap-up",
+      "reason": "candidate-action"
+    }
+  ]
+}

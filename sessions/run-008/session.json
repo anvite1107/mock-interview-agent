@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-008",
+  "problemId": "number-of-islands",
+  "startedAt": "2026-08-15T09:18:43.906Z",
+  "endedAt": "2026-08-15T09:19:58.873Z",
+  "finalState": "wrap-up",
+  "completed": true,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Number of Islands (medium)\n\nGiven an m x n 2D binary grid which represents a map of '1's (land) and '0's (water), return the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.\n\nConstraints:\n  - 1 <= m, n <= 300\n  - grid[i][j] is '0' or '1'\n\nWrite your solution as: def solution(grid: List[List[str]]) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "So I'm counting connected components of '1' cells in a character grid."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Two questions before I start: is adjacency four-directional or does diagonal count, and am I allowed to mutate the input grid?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "How should we handle a grid that contains invalid characters or is completely empty?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Four-directional, and I'd rather not mutate the input even if I'm allowed to — a scoring function that destroys its argument is a nasty surprise for the caller. I'll keep a visited set instead. BFS from each unvisited land cell. That's my plan — I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\nfrom collections import deque\n\n\ndef solution(grid):\n    if not grid or not grid[0]:\n        return 0\n\n    rows, cols = len(grid), len(grid[0])\n    seen = set()\n    count = 0\n\n    for r in range(rows):\n        for c in range(cols):\n            if grid[r][c] != \"1\" or (r, c) in seen:\n                continue\n            count += 1\n            queue = deque([(r, c)])\n            seen.add((r, c))\n            while queue:\n                cr, cc = queue.popleft()\n                for nr, nc in ((cr + 1, cc), (cr - 1, cc), (cr, cc + 1), (cr, cc - 1)):\n                    if 0 <= nr < rows and 0 <= nc < cols:\n                        if grid[nr][nc] == \"1\" and (nr, nc) not in seen:\n                            seen.add((nr, nc))\n                            queue.append((nr, nc))\n    return count"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "All green, including the all-water and single-cell grids. I'm done here, happy to move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "Time is O(m * n) — every cell is enqueued at most once because I mark it visited at enqueue time, not at dequeue time. Space is O(m * n) too, for the visited set plus the queue in the worst case where the whole grid is one island."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 5,
+      "code": "from collections import deque\n\n\ndef solution(grid):\n    if not grid or not grid[0]:\n        return 0\n\n    rows, cols = len(grid), len(grid[0])\n    seen = set()\n    count = 0\n\n    for r in range(rows):\n        for c in range(cols):\n            if grid[r][c] != \"1\" or (r, c) in seen:\n                continue\n            count += 1\n            queue = deque([(r, c)])\n            seen.add((r, c))\n            while queue:\n                cr, cc = queue.popleft()\n                for nr, nc in ((cr + 1, cc), (cr - 1, cc), (cr, cc + 1), (cr, cc - 1)):\n                    if 0 <= nr < rows and 0 <= nc < cols:\n                        if grid[nr][nc] == \"1\" and (nr, nc) not in seen:\n                            seen.add((nr, nc))\n                            queue.append((nr, nc))\n    return count\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 3,
+          "error": null,
+          "executionTimeMs": 61
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 3,
+          "error": null,
+          "executionTimeMs": 55
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 58
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 56
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "testing-debugging",
+      "to": "complexity-discussion",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "complexity-discussion",
+      "to": "wrap-up",
+      "reason": "candidate-action"
+    }
+  ]
+}

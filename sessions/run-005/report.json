@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-15T09:35:09.963Z",
+  "problem": {
+    "id": "container-with-most-water",
+    "title": "Container With Most Water",
+    "difficulty": "medium",
+    "referenceComplexity": {
+      "time": "O(n)",
+      "space": "O(1)"
+    }
+  },
+  "scores": {
+    "weightedTotal": 0,
+    "categories": [
+      {
+        "categoryId": "problem-understanding",
+        "label": "Problem understanding",
+        "weight": 15,
+        "score": 1,
+        "justification": "The candidate briefly mentions computing water trapped between bars, but expresses confusion with a different problem and completely fails to restate the problem correctly, omitting both constraints entirely.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "approach-correctness",
+        "label": "Approach correctness",
+        "weight": 20,
+        "score": 1,
+        "justification": "The candidate gave up early in the session and did not propose a valid algorithmic approach to solve the problem.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "complexity-analysis",
+        "label": "Complexity analysis",
+        "weight": 15,
+        "score": 1,
+        "justification": "The candidate did not state a time or space complexity as they abandoned the problem before writing any approach or code.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "edge-case-handling",
+        "label": "Edge-case handling",
+        "weight": 15,
+        "score": 1,
+        "justification": "No code was written and no test cases were executed (0/0 passed), meaning no edge cases were handled.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "code-correctness",
+        "label": "Code correctness",
+        "weight": 20,
+        "score": 1,
+        "justification": "No implementation was provided or executed.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "communication",
+        "label": "Communication",
+        "weight": 15,
+        "score": 1,
+        "justification": "The candidate offered brief remarks initially but quickly became flustered, confused the problem, and stopped participating constructively, failing to maintain narration or structured communication.",
+        "source": "judge"
+      }
+    ],
+    "overriddenCategoryIds": []
+  },
+  "execution": {
+    "core": {
+      "passed": 0,
+      "total": 0
+    },
+    "edge": {
+      "passed": 0,
+      "total": 0
+    },
+    "results": []
+  },
+  "flow": {
+    "finalState": "clarifying-questions",
+    "completed": false,
+    "statesReached": [
+      "problem-intro",
+      "clarifying-questions"
+    ],
+    "forcedAdvanceCount": 0,
+    "transitions": [
+      {
+        "from": "problem-intro",
+        "to": "clarifying-questions",
+        "reason": "candidate-action"
+      }
+    ]
+  },
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Container With Most Water (medium)\n\nYou are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of line i are (i, 0) and (i, height[i]). Find two lines that together with the x-axis form a container that holds the most water. Return the maximum amount of water it can store.\n\nConstraints:\n  - 2 <= len(height) <= 10^5\n  - 0 <= height[i] <= 10^4\n\nWrite your solution as: def solution(height: List[int]) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "So this is the one where you compute how much water gets trapped between the bars, right?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Oh — just two lines, not the whole skyline. Hm. So the water between them isn't blocked by anything in between?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "How do you expect the heights of any lines located between the two chosen endpoints to impact the calculation?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "I think I'm confusing this with a different problem and I'm not going to be useful here. Sorry."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "How should our logic handle a line where the height is given as zero?"
+    }
+  ]
+}

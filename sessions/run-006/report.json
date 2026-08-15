@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-15T09:35:25.113Z",
+  "problem": {
+    "id": "find-the-duplicate-number",
+    "title": "Find the Duplicate Number",
+    "difficulty": "hard",
+    "referenceComplexity": {
+      "time": "O(n)",
+      "space": "O(1)"
+    }
+  },
+  "scores": {
+    "weightedTotal": 25,
+    "categories": [
+      {
+        "categoryId": "problem-understanding",
+        "label": "Problem understanding",
+        "weight": 15,
+        "score": 1,
+        "justification": "The candidate's restatement is extremely minimal ('Find the one number that appears more than once.') and omits almost all of the specific constraints, inputs, outputs, and range requirements provided in the prompt.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "approach-correctness",
+        "label": "Approach correctness",
+        "weight": 20,
+        "score": 1,
+        "justification": "The candidate's approach uses sorting (`nums.sort()`), which directly violates the stated problem constraint to find the duplicate without modifying the array.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "complexity-analysis",
+        "label": "Complexity analysis",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate states the time complexity is O(n) (missing the O(n log n) cost of sorting) and states the space complexity is O(1) in place, ignoring that sorting typically requires space and the input array cannot be modified.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "edge-case-handling",
+        "label": "Edge-case handling",
+        "weight": 15,
+        "score": 3,
+        "justification": "The code passes all 4 edge-tagged test cases in the problem bank, but the candidate does not verbally name or discuss any edge cases before execution.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "code-correctness",
+        "label": "Code correctness",
+        "weight": 20,
+        "score": 3,
+        "justification": "The code passes all core-tagged test cases on the first execution attempt.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "communication",
+        "label": "Communication",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate provides sparse narration and jumps straight into coding after a minimal restatement, skipping proper phase transitions and checking in with the interviewer.",
+        "source": "judge"
+      }
+    ],
+    "overriddenCategoryIds": []
+  },
+  "execution": {
+    "core": {
+      "passed": 3,
+      "total": 3
+    },
+    "edge": {
+      "passed": 4,
+      "total": 4
+    },
+    "results": [
+      {
+        "testCaseId": "core-1",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-2",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-3",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-1",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-2",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-3",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-4",
+        "tag": "edge",
+        "passed": true
+      }
+    ]
+  },
+  "flow": {
+    "finalState": "wrap-up",
+    "completed": true,
+    "statesReached": [
+      "problem-intro",
+      "clarifying-questions",
+      "coding",
+      "testing-debugging",
+      "complexity-discussion",
+      "wrap-up"
+    ],
+    "forcedAdvanceCount": 0,
+    "transitions": [
+      {
+        "from": "problem-intro",
+        "to": "clarifying-questions",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "clarifying-questions",
+        "to": "coding",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "coding",
+        "to": "testing-debugging",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "testing-debugging",
+        "to": "complexity-discussion",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "complexity-discussion",
+        "to": "wrap-up",
+        "reason": "candidate-action"
+      }
+    ]
+  },
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Find the Duplicate Number (hard)\n\nGiven an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive, there is exactly one repeated number (which may appear more than twice). Find this repeated number without modifying the array and using only O(1) extra space.\n\nConstraints:\n  - 1 <= n <= 10^5\n  - len(nums) == n + 1\n  - 1 <= nums[i] <= n\n  - All integers appear once except exactly one, which appears two or more times\n\nWrite your solution as: def solution(nums: List[int]) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Find the one number that appears more than once."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Are there any constraints on how I solve it, or is anything fair game?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "Just to make sure we're on the same page, how do you interpret the requirements regarding extra space and modifying the input array?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "I'll sort it and then walk the array looking for two equal neighbours. That's the simplest thing that works — I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(nums):\n    nums.sort()\n    for i in range(1, len(nums)):\n        if nums[i] == nums[i - 1]:\n            return nums[i]\n    return -1"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Everything passes, including the case where the duplicate appears many times over. I'm done with it, let's move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "Time is O(n) — I do one pass over the array after sorting. Space is O(1), I'm not allocating anything, it's all in place."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ]
+}

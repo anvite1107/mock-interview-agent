@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-15T09:34:40.494Z",
+  "problem": {
+    "id": "reverse-nodes-in-k-group",
+    "title": "Reverse Nodes in k-Group",
+    "difficulty": "hard",
+    "referenceComplexity": {
+      "time": "O(n)",
+      "space": "O(1)"
+    }
+  },
+  "scores": {
+    "weightedTotal": 53.75,
+    "categories": [
+      {
+        "categoryId": "problem-understanding",
+        "label": "Problem understanding",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate restates the problem in their own words, capturing the core requirements (reversing k nodes at a time and leaving leftover nodes unchanged). However, checking against the stated constraints (1 <= n <= 5000, 1 <= k <= n, 0 <= Node.val <= 1000), the candidate does not explicitly restate the specific bounds or constraints. They ask about k and in-place modification, but do not surface or mention the constraints from the prompt, leading to a score of 2.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "approach-correctness",
+        "label": "Approach correctness",
+        "weight": 20,
+        "score": 3,
+        "justification": "The candidate's approach uses a dummy node, counts the length of the linked list to determine how many full groups of size k exist, and iteratively reverses each k-group in-place using O(1) auxiliary space. This matches the optimal reference solution for 'Reverse Nodes in k-Group'.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "complexity-analysis",
+        "label": "Complexity analysis",
+        "weight": 15,
+        "score": 4,
+        "justification": "The candidate accurately states a time complexity of O(n) (one pass to count, one pass to reverse) and a space complexity of O(1) (using only a dummy node and a few pointer variables). Furthermore, they explicitly explain which parts of the code drive each complexity.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "edge-case-handling",
+        "label": "Edge-case handling",
+        "weight": 15,
+        "score": 4,
+        "justification": "The code passes all 4 edge-tagged test cases. Additionally, the candidate explicitly discusses edge cases before running the code, such as k equal to 1 and lists whose lengths are an exact multiple of k.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "code-correctness",
+        "label": "Code correctness",
+        "weight": 20,
+        "score": 3,
+        "justification": "The code passes all 3 core-tagged test cases and all 4 edge-tagged test cases on the first execution attempt with no debugging iterations required.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "communication",
+        "label": "Communication",
+        "weight": 15,
+        "score": 3,
+        "justification": "The candidate narrates their thought process, discusses their approach (counting length, using a dummy node), writes the code, and discusses complexity, but does not explicitly signal phase transitions or systematically check in with the interviewer at natural decision points.",
+        "source": "judge"
+      }
+    ],
+    "overriddenCategoryIds": []
+  },
+  "execution": {
+    "core": {
+      "passed": 3,
+      "total": 3
+    },
+    "edge": {
+      "passed": 4,
+      "total": 4
+    },
+    "results": [
+      {
+        "testCaseId": "core-1",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-2",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-3",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-1",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-2",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-3",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-4",
+        "tag": "edge",
+        "passed": true
+      }
+    ]
+  },
+  "flow": {
+    "finalState": "wrap-up",
+    "completed": true,
+    "statesReached": [
+      "problem-intro",
+      "clarifying-questions",
+      "coding",
+      "testing-debugging",
+      "complexity-discussion",
+      "wrap-up"
+    ],
+    "forcedAdvanceCount": 0,
+    "transitions": [
+      {
+        "from": "problem-intro",
+        "to": "clarifying-questions",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "clarifying-questions",
+        "to": "coding",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "coding",
+        "to": "testing-debugging",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "testing-debugging",
+        "to": "complexity-discussion",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "complexity-discussion",
+        "to": "wrap-up",
+        "reason": "candidate-action"
+      }
+    ]
+  },
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Reverse Nodes in k-Group (hard)\n\nGiven the head of a linked list, reverse the nodes of the list k at a time, and return the modified list. k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k, leave the remaining nodes at the end as they are.\n\nConstraints:\n  - The number of nodes n satisfies 1 <= n <= 5000\n  - 1 <= k <= n\n  - 0 <= Node.val <= 1000\n\nWrite your solution as: def solution(head: ListNode, k: int) -> ListNode:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Reversing every k consecutive nodes, and any leftover tail shorter than k stays as it is. Is k guaranteed to be at least 1, and should I reverse in place rather than allocating new nodes?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "In place with O(1) extra space, then. The part I want to be careful about is the trailing partial group — I don't want to reverse it and then undo it. I'll count the list length first so I know exactly how many full groups there are."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "What should happen to the remaining nodes at the end if they don't form a complete group of size k?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "I'll also use a dummy node in front of the head, because the first group's reversal changes what the head is, and a dummy saves me from special-casing that. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(head, k):\n    if head is None or k <= 1:\n        return head\n\n    length = 0\n    node = head\n    while node is not None:\n        length += 1\n        node = node.next\n\n    dummy = ListNode(0, head)\n    group_prev = dummy\n\n    while length >= k:\n        prev = None\n        curr = group_prev.next\n        group_tail = curr\n        for _ in range(k):\n            nxt = curr.next\n            curr.next = prev\n            prev = curr\n            curr = nxt\n        group_prev.next = prev\n        group_tail.next = curr\n        group_prev = group_tail\n        length -= k\n\n    return dummy.next"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "All passing — including k equal to 1, which my early return handles, and the case where the list length is an exact multiple of k so there's no tail at all. I'm done with the code, happy to move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "Time is O(n): the counting pass is one traversal and the reversal touches each node exactly once more, so 2n, which is O(n). Space is O(1) — the dummy node and a handful of pointers, no recursion and no extra list."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ]
+}

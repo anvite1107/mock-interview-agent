@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-15T09:34:25.164Z",
+  "problem": {
+    "id": "container-with-most-water",
+    "title": "Container With Most Water",
+    "difficulty": "medium",
+    "referenceComplexity": {
+      "time": "O(n)",
+      "space": "O(1)"
+    }
+  },
+  "scores": {
+    "weightedTotal": 30,
+    "categories": [
+      {
+        "categoryId": "problem-understanding",
+        "label": "Problem understanding",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate restates the problem in terms of finding the maximum area between pairs of lines, but completely omits both stated constraints (array length bounds and height value bounds) from their restatement.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "approach-correctness",
+        "label": "Approach correctness",
+        "weight": 20,
+        "score": 2,
+        "justification": "The candidate implements a brute-force O(n^2) nested loop approach first when a materially better O(n) two-pointer approach exists in the reference solution, and although they mention the optimal two-pointer approach verbally afterward, they do not implement it in code.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "complexity-analysis",
+        "label": "Complexity analysis",
+        "weight": 15,
+        "score": 1,
+        "justification": "The candidate does not state a time or space complexity for the brute force code they actually submitted, only discussing the complexity of the optimal two-pointer approach they left unimplemented.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "edge-case-handling",
+        "label": "Edge-case handling",
+        "weight": 15,
+        "score": 3,
+        "justification": "The code successfully passes all 4 edge-tagged test cases in the test suite.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "code-correctness",
+        "label": "Code correctness",
+        "weight": 20,
+        "score": 3,
+        "justification": "The submitted brute-force code passes all 3 core-tagged test cases successfully on the first execution attempt.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "communication",
+        "label": "Communication",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate provides sporadic narration, jumping quickly from understanding to coding without a structured explanation of the full implementation plan or continuous check-ins.",
+        "source": "judge"
+      }
+    ],
+    "overriddenCategoryIds": []
+  },
+  "execution": {
+    "core": {
+      "passed": 3,
+      "total": 3
+    },
+    "edge": {
+      "passed": 4,
+      "total": 4
+    },
+    "results": [
+      {
+        "testCaseId": "core-1",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-2",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-3",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-1",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-2",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-3",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-4",
+        "tag": "edge",
+        "passed": true
+      }
+    ]
+  },
+  "flow": {
+    "finalState": "wrap-up",
+    "completed": true,
+    "statesReached": [
+      "problem-intro",
+      "clarifying-questions",
+      "coding",
+      "testing-debugging",
+      "complexity-discussion",
+      "wrap-up"
+    ],
+    "forcedAdvanceCount": 0,
+    "transitions": [
+      {
+        "from": "problem-intro",
+        "to": "clarifying-questions",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "clarifying-questions",
+        "to": "coding",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "coding",
+        "to": "testing-debugging",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "testing-debugging",
+        "to": "complexity-discussion",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "complexity-discussion",
+        "to": "wrap-up",
+        "reason": "candidate-action"
+      }
+    ]
+  },
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Container With Most Water (medium)\n\nYou are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of line i are (i, 0) and (i, height[i]). Find two lines that together with the x-axis form a container that holds the most water. Return the maximum amount of water it can store.\n\nConstraints:\n  - 2 <= len(height) <= 10^5\n  - 0 <= height[i] <= 10^4\n\nWrite your solution as: def solution(height: List[int]) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "The area between two lines is the shorter of the two heights times the distance between them. I want the maximum over all pairs."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Can I assume there are at least two lines in the input?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "Are we guaranteed that all the integers in the height array will be non-negative?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Let me get the brute force down first so I have something correct, then optimize. Every pair, track the max. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(height):\n    best = 0\n    for i in range(len(height)):\n        for j in range(i + 1, len(height)):\n            area = min(height[i], height[j]) * (j - i)\n            if area > best:\n                best = area\n    return best"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "All passing. Now the optimization: start a pointer at each end, and always move the one pointing at the shorter line inward. The reason that's safe is that the shorter line caps the area for every pair it's part of — moving the taller pointer in can only shrink the width without ever raising the height, so you can't lose the optimum by discarding it. That gets you one pass. I'll leave the code as it is though — let's move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "It's O(n) time — each pointer moves inward and they meet in the middle, so every index is visited once. O(1) space, just the two pointers and the running max."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ]
+}

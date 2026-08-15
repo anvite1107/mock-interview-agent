@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-012",
+  "problemId": "subarray-sum-equals-k",
+  "startedAt": "2026-08-15T09:24:13.990Z",
+  "endedAt": "2026-08-15T09:25:13.932Z",
+  "finalState": "wrap-up",
+  "completed": true,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Subarray Sum Equals K (medium)\n\nGiven an array of integers nums and an integer k, return the total number of contiguous subarrays whose sum equals k.\n\nConstraints:\n  - 1 <= len(nums) <= 2 * 10^4\n  - -1000 <= nums[i] <= 1000\n  - -10^7 <= k <= 10^7\n\nWrite your solution as: def solution(nums: List[int], k: int) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Counting contiguous subarrays that sum to k. First question: can the array contain negative numbers?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Then a sliding window is out — with negatives the running sum isn't monotonic, so there's no valid shrink condition. I'll go with prefix sums in a hash map: for each running sum, count how many earlier prefixes equal running - k."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "One detail I want to get right is seeding the map with {0: 1}. That entry stands for the empty prefix, and it's what lets a subarray starting at index 0 be counted. No more questions, I'm ready to start coding."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "coding",
+      "text": "Whenever you're ready, feel free to walk me through your code as you start writing it."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(nums, k):\n    counts = {0: 1}\n    running = 0\n    total = 0\n    for n in nums:\n        running += n\n        total += counts.get(running - k, 0)\n        counts[running] = counts.get(running, 0) + 1\n    return total"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "All passing, including the all-zeros case, which is the one I'd expect to break a naive version — it wants 6, not 3, because overlapping subarrays each count. I'm satisfied with this — let's move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "O(n) time, single pass with O(1) expected work per element. O(n) space for the prefix-count map, since in the worst case every prefix sum is distinct."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 5,
+      "code": "def solution(nums, k):\n    counts = {0: 1}\n    running = 0\n    total = 0\n    for n in nums:\n        running += n\n        total += counts.get(running - k, 0)\n        counts[running] = counts.get(running, 0) + 1\n    return total\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 2,
+          "error": null,
+          "executionTimeMs": 59
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 2,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 3,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 6,
+          "error": null,
+          "executionTimeMs": 57
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "testing-debugging",
+      "to": "complexity-discussion",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "complexity-discussion",
+      "to": "wrap-up",
+      "reason": "candidate-action"
+    }
+  ]
+}

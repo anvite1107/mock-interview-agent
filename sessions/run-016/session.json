@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-016",
+  "problemId": "number-of-islands",
+  "startedAt": "2026-08-15T09:28:29.041Z",
+  "endedAt": "2026-08-15T09:30:44.210Z",
+  "finalState": "testing-debugging",
+  "completed": false,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Number of Islands (medium)\n\nGiven an m x n 2D binary grid which represents a map of '1's (land) and '0's (water), return the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.\n\nConstraints:\n  - 1 <= m, n <= 300\n  - grid[i][j] is '0' or '1'\n\nWrite your solution as: def solution(grid: List[List[str]]) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Counting islands in a grid."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Do diagonals connect?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "What should we return if the input grid is completely empty or null?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Ok, four directions only. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(grid):\n    if not grid:\n        return 0\n\n    count = 0\n    for r in range(len(grid))\n        for c in range(len(grid[0])):\n            if grid[r][c] == \"1\":\n                count += 1\n    return count"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Syntax error, I dropped a colon on the for loop. One second."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "Now that your tests are running, take a look at the failing outputs and walk me through what scenarios your current logic might be mishandling."
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "(submits code)\n\ndef solution(grid):\n    if not grid:\n        return 0\n\n    count = 0\n    for r in range(len(grid)):\n        for c in range(len(grid[0])):\n            if grid[r][c] == \"1\":\n                count += 1\n    return count"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "How does your current approach handle a single island that spans across multiple adjacent cells?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "It runs now but the numbers are way off — I'm counting every land cell instead of grouping them. I know I need some kind of traversal from each cell but I'm blanking on how to mark the ones I've already covered."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "How could you update the cells you visit during a traversal so you don't end up recounting parts of the same island?"
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 5,
+      "code": "def solution(grid):\n    if not grid:\n        return 0\n\n    count = 0\n    for r in range(len(grid))\n        for c in range(len(grid[0])):\n            if grid[r][c] == \"1\":\n                count += 1\n    return count\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": null,
+          "error": {
+            "type": "syntax-error",
+            "message": "File \"/var/folders/p_/lcbjw9897s3ght27d98vbjy80000gn/T/mock-interview-Az8iLF/candidate.py\", line 6\n    for r in range(len(grid))\n                             ^\nSyntaxError: expected ':'"
+          },
+          "executionTimeMs": 0
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": null,
+          "error": {
+            "type": "syntax-error",
+            "message": "File \"/var/folders/p_/lcbjw9897s3ght27d98vbjy80000gn/T/mock-interview-Az8iLF/candidate.py\", line 6\n    for r in range(len(grid))\n                             ^\nSyntaxError: expected ':'"
+          },
+          "executionTimeMs": 0
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": null,
+          "error": {
+            "type": "syntax-error",
+            "message": "File \"/var/folders/p_/lcbjw9897s3ght27d98vbjy80000gn/T/mock-interview-Az8iLF/candidate.py\", line 6\n    for r in range(len(grid))\n                             ^\nSyntaxError: expected ':'"
+          },
+          "executionTimeMs": 0
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": null,
+          "error": {
+            "type": "syntax-error",
+            "message": "File \"/var/folders/p_/lcbjw9897s3ght27d98vbjy80000gn/T/mock-interview-Az8iLF/candidate.py\", line 6\n    for r in range(len(grid))\n                             ^\nSyntaxError: expected ':'"
+          },
+          "executionTimeMs": 0
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": null,
+          "error": {
+            "type": "syntax-error",
+            "message": "File \"/var/folders/p_/lcbjw9897s3ght27d98vbjy80000gn/T/mock-interview-Az8iLF/candidate.py\", line 6\n    for r in range(len(grid))\n                             ^\nSyntaxError: expected ':'"
+          },
+          "executionTimeMs": 0
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": null,
+          "error": {
+            "type": "syntax-error",
+            "message": "File \"/var/folders/p_/lcbjw9897s3ght27d98vbjy80000gn/T/mock-interview-Az8iLF/candidate.py\", line 6\n    for r in range(len(grid))\n                             ^\nSyntaxError: expected ':'"
+          },
+          "executionTimeMs": 0
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": null,
+          "error": {
+            "type": "syntax-error",
+            "message": "File \"/var/folders/p_/lcbjw9897s3ght27d98vbjy80000gn/T/mock-interview-Az8iLF/candidate.py\", line 6\n    for r in range(len(grid))\n                             ^\nSyntaxError: expected ':'"
+          },
+          "executionTimeMs": 0
+        }
+      ]
+    },
+    {
+      "turnIndex": 8,
+      "code": "def solution(grid):\n    if not grid:\n        return 0\n\n    count = 0\n    for r in range(len(grid)):\n        for c in range(len(grid[0])):\n            if grid[r][c] == \"1\":\n                count += 1\n    return count\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": 6,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 3, got 6"
+          },
+          "executionTimeMs": 59
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": 9,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 1, got 9"
+          },
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": 7,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 3, got 7"
+          },
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": 4,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 1, got 4"
+          },
+          "executionTimeMs": 54
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 55
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 64
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    }
+  ]
+}

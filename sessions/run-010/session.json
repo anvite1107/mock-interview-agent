@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-010",
+  "problemId": "subarray-sum-equals-k",
+  "startedAt": "2026-08-15T09:21:13.843Z",
+  "endedAt": "2026-08-15T09:22:28.820Z",
+  "finalState": "wrap-up",
+  "completed": true,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Subarray Sum Equals K (medium)\n\nGiven an array of integers nums and an integer k, return the total number of contiguous subarrays whose sum equals k.\n\nConstraints:\n  - 1 <= len(nums) <= 2 * 10^4\n  - -1000 <= nums[i] <= 1000\n  - -10^7 <= k <= 10^7\n\nWrite your solution as: def solution(nums: List[int], k: int) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Ok, subarrays summing to k."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "No questions. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(nums, k):\n    count = 0\n    for i in range(len(nums)):\n        total = 0\n        for j in range(i, len(nums)):\n            total += nums[j]\n            if total == k:\n                count += 1\n                break\n    return count"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Some of those are failing but I'm not sure why, the logic looks right to me."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "Can you walk through how your code handles an array with negative numbers or a zero sum, and trace the state of your variables for one of the failing cases?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "I don't think I'm going to get to the bottom of it, let's move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "It's two nested loops so probably O(n^2)? And O(1) space I think, I'm not storing anything."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 3,
+      "code": "def solution(nums, k):\n    count = 0\n    for i in range(len(nums)):\n        total = 0\n        for j in range(i, len(nums)):\n            total += nums[j]\n            if total == k:\n                count += 1\n                break\n    return count\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 2,
+          "error": null,
+          "executionTimeMs": 60
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 2,
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": 2,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 3, got 2"
+          },
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 55
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 53
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": false,
+          "actualOutput": 3,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 6, got 3"
+          },
+          "executionTimeMs": 51
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "testing-debugging",
+      "to": "complexity-discussion",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "complexity-discussion",
+      "to": "wrap-up",
+      "reason": "candidate-action"
+    }
+  ]
+}

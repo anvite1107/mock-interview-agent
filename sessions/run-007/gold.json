@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-007",
+  "problemId": "two-sum",
+  "labeledAt": "2026-08-15T11:48:42.006Z",
+  "rubricCategoryIds": [
+    "problem-understanding",
+    "approach-correctness",
+    "complexity-analysis",
+    "edge-case-handling",
+    "code-correctness",
+    "communication"
+  ],
+  "categories": [
+    {
+      "categoryId": "problem-understanding",
+      "justification": "Candiate does restate the problem in their own words but misses out on stating any constraint mentioned and input mentioned",
+      "score": 2
+    },
+    {
+      "categoryId": "approach-correctness",
+      "justification": "candidate solves the problem using the refernce solutions hashmap stratergy, does not improve on this with any better appraoch",
+      "score": 3
+    },
+    {
+      "categoryId": "complexity-analysis",
+      "justification": "Candidate states the correct time and space complexity for their implementation and sufficiently explains how the code drives them to be that way",
+      "score": 4
+    },
+    {
+      "categoryId": "edge-case-handling",
+      "justification": "candidate passes all edge tagged cases but does not name any one before submitting",
+      "score": 3
+    },
+    {
+      "categoryId": "code-correctness",
+      "justification": "passes all core test cases but not on the first attempt, there is a retry required",
+      "score": 3
+    },
+    {
+      "categoryId": "communication",
+      "justification": "candidate narrates through problem understanding, approach and implementation, but does not always check in with interviewer at decision points, sometimes bypassing the interviewer and just moving with coding",
+      "score": 3
+    }
+  ]
+}

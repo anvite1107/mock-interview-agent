@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-15T09:36:10.726Z",
+  "problem": {
+    "id": "valid-parentheses",
+    "title": "Valid Parentheses",
+    "difficulty": "easy",
+    "referenceComplexity": {
+      "time": "O(n)",
+      "space": "O(n)"
+    }
+  },
+  "scores": {
+    "weightedTotal": 23.75,
+    "categories": [
+      {
+        "categoryId": "problem-understanding",
+        "label": "Problem understanding",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate briefly states they need to check if brackets are balanced, completely omitting both stated constraints (length bounds and character set) as well as the crucial requirement about correct nesting order (as evidenced by viewing it purely as a 'counting problem'). According to the rubric anchors, omitting input/output requirements or constraints results in a score of 2.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "approach-correctness",
+        "label": "Approach correctness",
+        "weight": 20,
+        "score": 1,
+        "justification": "The candidate uses a simple integer balance counter instead of a stack. This is a brute-force or overly simplistic method that fundamentally cannot solve the problem for misnested brackets like '(]'. A stack-based approach is required, so this approach does not produce a correct output.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "complexity-analysis",
+        "label": "Complexity analysis",
+        "weight": 15,
+        "score": 3,
+        "justification": "The candidate correctly states that the time complexity is O(n) because of a single loop over the string, and the space complexity is O(1) since they only use a single counter variable. These complexities accurately match their implemented code.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "edge-case-handling",
+        "label": "Edge-case handling",
+        "weight": 15,
+        "score": 2,
+        "justification": "The execution results show that the code passed 3 out of 4 edge-tagged test cases. According to the anchor descriptions, passing some but not all edge-tagged test cases corresponds to a score of 2.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "code-correctness",
+        "label": "Code correctness",
+        "weight": 20,
+        "score": 2,
+        "justification": "The execution results show that the code passed 2 out of 3 core-tagged test cases (failing core-3 on inputs like '(]'). According to the rubric anchors, passing some but not all core-tagged test cases merits a score of 2.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "communication",
+        "label": "Communication",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate provides very minimal narration, quickly jumping into coding without explaining their plan, and offers sporadic thoughts only after a test case fails. This fits best with sporadic narration and long silent stretches.",
+        "source": "judge"
+      }
+    ],
+    "overriddenCategoryIds": []
+  },
+  "execution": {
+    "core": {
+      "passed": 2,
+      "total": 3
+    },
+    "edge": {
+      "passed": 3,
+      "total": 4
+    },
+    "results": [
+      {
+        "testCaseId": "core-1",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-2",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-3",
+        "tag": "core",
+        "passed": false
+      },
+      {
+        "testCaseId": "edge-1",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-2",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-3",
+        "tag": "edge",
+        "passed": false
+      },
+      {
+        "testCaseId": "edge-4",
+        "tag": "edge",
+        "passed": true
+      }
+    ]
+  },
+  "flow": {
+    "finalState": "wrap-up",
+    "completed": true,
+    "statesReached": [
+      "problem-intro",
+      "clarifying-questions",
+      "coding",
+      "testing-debugging",
+      "complexity-discussion",
+      "wrap-up"
+    ],
+    "forcedAdvanceCount": 0,
+    "transitions": [
+      {
+        "from": "problem-intro",
+        "to": "clarifying-questions",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "clarifying-questions",
+        "to": "coding",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "coding",
+        "to": "testing-debugging",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "testing-debugging",
+        "to": "complexity-discussion",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "complexity-discussion",
+        "to": "wrap-up",
+        "reason": "candidate-action"
+      }
+    ]
+  },
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Valid Parentheses (easy)\n\nGiven a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. A string is valid if every open bracket is closed by the same type of bracket, and brackets are closed in the correct order.\n\nConstraints:\n  - 1 <= s.length <= 10^4\n  - s consists of parentheses only '()[]{}'\n\nWrite your solution as: def solution(s: str) -> bool:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "So I just need to check the brackets are balanced."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Nothing to clarify, it's a counting problem. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(s):\n    balance = 0\n    for ch in s:\n        if ch in \"([{\":\n            balance += 1\n        else:\n            balance -= 1\n            if balance < 0:\n                return False\n    return balance == 0"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "core-3 is failing on '(]' — I get true and it wants false. That's odd, the counts balance out there."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "Why do you think matching counts alone might not be enough to guarantee that the brackets are closed in the correct order?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Maybe it cares about the order somehow. I'm not sure how to handle that, I'll leave it and move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "O(n) time since it's one loop over the string. Space is O(1)."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ]
+}

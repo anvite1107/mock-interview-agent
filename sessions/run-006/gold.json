@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-006",
+  "problemId": "find-the-duplicate-number",
+  "labeledAt": "2026-08-15T12:20:59.695Z",
+  "rubricCategoryIds": [
+    "problem-understanding",
+    "approach-correctness",
+    "complexity-analysis",
+    "edge-case-handling",
+    "code-correctness",
+    "communication"
+  ],
+  "categories": [
+    {
+      "categoryId": "problem-understanding",
+      "justification": "Candidate restates the problem in their words. Although it is a minimal restatement, omitting the main part of the problem: the constraints",
+      "score": 1
+    },
+    {
+      "categoryId": "approach-correctness",
+      "justification": "candidate does not have correct solution, violating the constraints",
+      "score": 1
+    },
+    {
+      "categoryId": "complexity-analysis",
+      "justification": "the space and time complexity stated is incorrect",
+      "score": 2
+    },
+    {
+      "categoryId": "edge-case-handling",
+      "justification": "all edge tagged cases in problem bank pass, there is no verbal naming of any case",
+      "score": 3
+    },
+    {
+      "categoryId": "code-correctness",
+      "justification": "all core cases pass on first attempt with no debugging iterations required",
+      "score": 4
+    },
+    {
+      "categoryId": "communication",
+      "justification": "candidate narrates fairly continuously, providing approach before coding although they miss out on constraints",
+      "score": 3
+    }
+  ]
+}

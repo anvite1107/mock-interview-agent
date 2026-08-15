@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-010",
+  "problemId": "subarray-sum-equals-k",
+  "labeledAt": "2026-08-15T11:35:20.241Z",
+  "rubricCategoryIds": [
+    "problem-understanding",
+    "approach-correctness",
+    "complexity-analysis",
+    "edge-case-handling",
+    "code-correctness",
+    "communication"
+  ],
+  "categories": [
+    {
+      "categoryId": "problem-understanding",
+      "justification": "Candidate simply states subarrays summing to k. This does not imply if he has to return the number of subarrays or the subarrays themselves, if the subarray numbers are contiguous or not",
+      "score": 1
+    },
+    {
+      "categoryId": "approach-correctness",
+      "justification": "Candidate does not \"state\" an approach, and their approach is incorrect, failing to pass even core tests",
+      "score": 1
+    },
+    {
+      "categoryId": "complexity-analysis",
+      "justification": "Although the code is incorrect, candidate correctly explains the space and time complexity, providing reasoning in very short",
+      "score": 3
+    },
+    {
+      "categoryId": "edge-case-handling",
+      "justification": "only 2 edge case tests pass",
+      "score": 2
+    },
+    {
+      "categoryId": "code-correctness",
+      "justification": "only 2 core test cases pass",
+      "score": 2
+    },
+    {
+      "categoryId": "communication",
+      "justification": "Candidate does not ask any clarifying questions, doesn't state reasoning for their approach, refuses to solve the problem further",
+      "score": 1
+    }
+  ]
+}

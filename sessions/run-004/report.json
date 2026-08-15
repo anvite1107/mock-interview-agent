@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-15T09:34:55.663Z",
+  "problem": {
+    "id": "two-sum",
+    "title": "Two Sum",
+    "difficulty": "easy",
+    "referenceComplexity": {
+      "time": "O(n)",
+      "space": "O(n)"
+    }
+  },
+  "scores": {
+    "weightedTotal": 50,
+    "categories": [
+      {
+        "categoryId": "problem-understanding",
+        "label": "Problem understanding",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate restates the problem in their own words, mentioning that they are given an array of integers and a target, and return the indices of the two numbers that add to the target, acknowledging 'exactly one valid answer'. However, looking closely at the stated constraints, the candidate completely omits the bounds on the array length (2 <= len(nums) <= 10^4) and the value ranges for elements and the target. Furthermore, when they ask clarifying questions, they ask about using the same element twice and negative numbers (both of which are addressed in the prompt or constraints), failing to cover all stated constraints.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "approach-correctness",
+        "label": "Approach correctness",
+        "weight": 20,
+        "score": 3,
+        "justification": "The candidate's approach uses a hash map to find the complement in a single pass, which matches the optimal reference solution's algorithmic strategy (O(n) time complexity).",
+        "source": "judge"
+      },
+      {
+        "categoryId": "complexity-analysis",
+        "label": "Complexity analysis",
+        "weight": 15,
+        "score": 3,
+        "justification": "The candidate accurately states that the time complexity is O(n) because it's a single pass with O(1) dictionary lookups, and space complexity is O(n) for the hash map. They also correctly compare it against the O(n^2) brute force approach.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "edge-case-handling",
+        "label": "Edge-case handling",
+        "weight": 15,
+        "score": 4,
+        "justification": "The code passes all 4 edge-tagged test cases. Additionally, the candidate verbally identifies an edge case during testing—specifically avoiding using the same element twice by checking the complement before inserting the current value into the map—which addresses an edge case inherent to the problem logic.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "code-correctness",
+        "label": "Code correctness",
+        "weight": 20,
+        "score": 3,
+        "justification": "The candidate's code passes all 3 core-tagged test cases and all 4 edge-tagged test cases successfully on execution without needing any debugging iterations.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "communication",
+        "label": "Communication",
+        "weight": 15,
+        "score": 3,
+        "justification": "The candidate narrates their understanding, asks questions, outlines their plan ('I'll use a hash map... One pass'), writes the code, and explains their reasoning during testing and complexity analysis, maintaining continuous narration.",
+        "source": "judge"
+      }
+    ],
+    "overriddenCategoryIds": []
+  },
+  "execution": {
+    "core": {
+      "passed": 3,
+      "total": 3
+    },
+    "edge": {
+      "passed": 4,
+      "total": 4
+    },
+    "results": [
+      {
+        "testCaseId": "core-1",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-2",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-3",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-1",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-2",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-3",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-4",
+        "tag": "edge",
+        "passed": true
+      }
+    ]
+  },
+  "flow": {
+    "finalState": "wrap-up",
+    "completed": true,
+    "statesReached": [
+      "problem-intro",
+      "clarifying-questions",
+      "coding",
+      "testing-debugging",
+      "complexity-discussion",
+      "wrap-up"
+    ],
+    "forcedAdvanceCount": 0,
+    "transitions": [
+      {
+        "from": "problem-intro",
+        "to": "clarifying-questions",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "clarifying-questions",
+        "to": "coding",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "coding",
+        "to": "testing-debugging",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "testing-debugging",
+        "to": "complexity-discussion",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "complexity-discussion",
+        "to": "wrap-up",
+        "reason": "candidate-action"
+      }
+    ]
+  },
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Two Sum (easy)\n\nGiven an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`. You may assume that each input has exactly one solution, and you may not use the same element twice. Return the indices in ascending order.\n\nConstraints:\n  - 2 <= len(nums) <= 10^4\n  - -10^9 <= nums[i] <= 10^9\n  - -10^9 <= target <= 10^9\n  - Exactly one valid answer exists for each input\n\nWrite your solution as: def solution(nums: List[int], target: int) -> List[int]:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Let me make sure I have this. I'm given an array of integers and a target, and I return the indices of the two numbers that add to the target. Exactly one valid answer."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Two things: can the same element be used twice, and can the numbers be negative?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "Before we dive into the code, how would you like the returned indices to be ordered if there are multiple possible pairs?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Got it — distinct indices, and negatives are in play. Then I don't want to assume anything about ordering. I'll use a hash map from value to index and check for the complement as I go. One pass. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        if target - n in seen:\n            return [seen[target - n], i]\n        seen[n] = i\n    return []"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "All passing. The complement check happens before I insert the current value, which is what keeps an element from pairing with itself — that's the case I'd have gotten wrong with a naive version. I'm happy with this solution — let's move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "Time is O(n): one pass, and dictionary lookups are O(1) on average. Space is O(n) for the map in the worst case where no pair exists until the very end. The brute force would be O(n^2) time and O(1) space, so this is the usual time-for-space trade."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ]
+}

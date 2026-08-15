@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-018",
+  "problemId": "binary-tree-level-order-traversal",
+  "startedAt": "2026-08-15T09:31:58.929Z",
+  "endedAt": "2026-08-15T09:33:14.022Z",
+  "finalState": "wrap-up",
+  "completed": true,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Binary Tree Level Order Traversal (medium)\n\nGiven the root of a binary tree, return the level order traversal of its nodes' values (i.e., from left to right, level by level).\n\nConstraints:\n  - 0 <= number of nodes <= 2000\n  - -1000 <= Node.val <= 1000\n\nWrite your solution as: def solution(root: TreeNode) -> List[List[int]]:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Ok so, tree problems. I always like to think about whether it's a DFS or a BFS shape of problem first, that's basically my starting point with anything tree-shaped, because the traversal order kind of falls out of that decision."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "So essentially what we're doing here is going level by level, and each level is its own list in the output, which is basically a level order traversal, which is essentially BFS. Is the tree guaranteed to be binary?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "How should your function handle an empty tree where the root is null?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Right, binary, so at most two children. I'm going to use a queue for this, which is the standard thing for BFS, and then essentially just collect the values as I go. So yeah, I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\nfrom collections import deque\n\n\ndef solution(root):\n    if root is None:\n        return []\n\n    levels = []\n    queue = deque([root])\n    while queue:\n        level = []\n        for _ in range(len(queue)):\n            node = queue.popleft()\n            level.append(node.val)\n            if node.left is not None:\n                queue.append(node.left)\n            if node.right is not None:\n                queue.append(node.right)\n        levels.append(level)\n    return levels"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Great, so that's all passing, which is basically what I expected because it's a pretty standard traversal at the end of the day. So yeah, I'm done, we can move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "Complexity-wise it's O(n) because you're basically visiting every node one time, and the space is also O(n) essentially because of the queue."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 5,
+      "code": "from collections import deque\n\n\ndef solution(root):\n    if root is None:\n        return []\n\n    levels = []\n    queue = deque([root])\n    while queue:\n        level = []\n        for _ in range(len(queue)):\n            node = queue.popleft()\n            level.append(node.val)\n            if node.left is not None:\n                queue.append(node.left)\n            if node.right is not None:\n                queue.append(node.right)\n        levels.append(level)\n    return levels\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            [
+              3
+            ],
+            [
+              9,
+              20
+            ],
+            [
+              15,
+              7
+            ]
+          ],
+          "error": null,
+          "executionTimeMs": 59
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [
+            [
+              1
+            ]
+          ],
+          "error": null,
+          "executionTimeMs": 55
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": [],
+          "error": null,
+          "executionTimeMs": 54
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ],
+          "error": null,
+          "executionTimeMs": 55
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": [
+            [
+              -1
+            ],
+            [
+              -2,
+              -3
+            ]
+          ],
+          "error": null,
+          "executionTimeMs": 55
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "testing-debugging",
+      "to": "complexity-discussion",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "complexity-discussion",
+      "to": "wrap-up",
+      "reason": "candidate-action"
+    }
+  ]
+}

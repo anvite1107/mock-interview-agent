@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-002",
+  "problemId": "container-with-most-water",
+  "labeledAt": "2026-08-15T09:54:16.028Z",
+  "rubricCategoryIds": [
+    "problem-understanding",
+    "approach-correctness",
+    "complexity-analysis",
+    "edge-case-handling",
+    "code-correctness",
+    "communication"
+  ],
+  "categories": [
+    {
+      "categoryId": "problem-understanding",
+      "justification": "I believe it is 4. Since the candidate does restate the problem \"the area between two lines... I want the maximum over all pairs\". In addition, the candidate asks one clarifying question \"Can I assume..\"",
+      "score": 4
+    },
+    {
+      "categoryId": "approach-correctness",
+      "justification": "The candidate acknowledges that they have performed the brute force method, states a better approach but does not follow up on it",
+      "score": 2
+    },
+    {
+      "categoryId": "complexity-analysis",
+      "justification": "The complexity stated does not match their implementation, but the implementation of the approach they did not follow up on",
+      "score": 2
+    },
+    {
+      "categoryId": "edge-case-handling",
+      "justification": "All edge tagged cases pass, but candidate has not stated any edge case verbally",
+      "score": 3
+    },
+    {
+      "categoryId": "code-correctness",
+      "justification": "all core-tagged cases passed in first attempt but candidate did not trace through any one before running the code",
+      "score": 4
+    },
+    {
+      "categoryId": "communication",
+      "justification": "The candidate does narrate through all phases and signals transition but does not check in with the interviewer at decision points",
+      "score": 4
+    }
+  ]
+}

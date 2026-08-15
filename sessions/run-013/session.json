@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-013",
+  "problemId": "longest-substring-without-repeating-characters",
+  "startedAt": "2026-08-15T09:25:13.940Z",
+  "endedAt": "2026-08-15T09:26:28.923Z",
+  "finalState": "wrap-up",
+  "completed": true,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Longest Substring Without Repeating Characters (medium)\n\nGiven a string s, find the length of the longest substring without repeating characters.\n\nConstraints:\n  - 0 <= len(s) <= 5 * 10^4\n  - s consists of English letters, digits, symbols, and spaces\n\nWrite your solution as: def solution(s: str) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Longest substring with all distinct characters. Substring meaning contiguous, not subsequence — checking that."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Contiguous, good. What's the character set — ASCII, or should I assume arbitrary Unicode?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "How would you expect your function to behave if the input string is empty?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "I'll use a sliding window with a map from character to its last index. When I hit a repeat that's inside the current window, I jump the start to just past the previous occurrence. The guard matters: if the previous occurrence is already behind the start, I leave the start alone, otherwise the window can move backwards. No further questions — I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(s):\n    last_seen = {}\n    start = 0\n    best = 0\n    for i, ch in enumerate(s):\n        if ch in last_seen and last_seen[ch] >= start:\n            start = last_seen[ch] + 1\n        last_seen[ch] = i\n        best = max(best, i - start + 1)\n    return best"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "All passing, including 'dvdf', which is the one that catches a window moving backwards. I'm done, let's move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "For complexity — the outer loop is over the string, but the start pointer also scans back through the window each time it moves, so I'd call it O(n^2) worst case. Space is O(min(n, m)) for the map, bounded by the alphabet size."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 5,
+      "code": "def solution(s):\n    last_seen = {}\n    start = 0\n    best = 0\n    for i, ch in enumerate(s):\n        if ch in last_seen and last_seen[ch] >= start:\n            start = last_seen[ch] + 1\n        last_seen[ch] = i\n        best = max(best, i - start + 1)\n    return best\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 3,
+          "error": null,
+          "executionTimeMs": 60
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 55
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 3,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 2,
+          "error": null,
+          "executionTimeMs": 53
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 3,
+          "error": null,
+          "executionTimeMs": 56
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "testing-debugging",
+      "to": "complexity-discussion",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "complexity-discussion",
+      "to": "wrap-up",
+      "reason": "candidate-action"
+    }
+  ]
+}

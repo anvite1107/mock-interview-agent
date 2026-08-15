@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-015",
+  "problemId": "validate-binary-search-tree",
+  "startedAt": "2026-08-15T09:27:13.983Z",
+  "endedAt": "2026-08-15T09:28:29.033Z",
+  "finalState": "wrap-up",
+  "completed": true,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Validate Binary Search Tree (medium)\n\nGiven the root of a binary tree, determine if it is a valid binary search tree (BST). A valid BST is defined as: the left subtree contains only nodes with values strictly less than the node's value; the right subtree contains only nodes with values strictly greater than the node's value; both subtrees must also be valid BSTs.\n\nConstraints:\n  - 0 <= number of nodes <= 10^4\n  - -2^31 <= Node.val <= 2^31 - 1\n\nWrite your solution as: def solution(root: TreeNode) -> bool:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Validating a BST. Left subtree strictly less, right subtree strictly greater, and it has to hold for the whole subtree not just the immediate children."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Are duplicate values allowed anywhere in the tree?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "What should the function return if the tree is completely empty with zero nodes?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "No duplicates, so strict inequalities. I'll recurse and check each node against its parent, passing bounds down. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(root):\n    def check(node, low, high):\n        if node is None:\n            return True\n        if not (low < node.val < high):\n            return False\n        return check(node.left, low, node.val) and check(node.right, node.val, high)\n\n    return check(root, float(\"-inf\"), float(\"inf\"))"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Everything passes. The one with 6 under 15 on the right of 10 is the case that gets you if you only compare against the parent, and that comes out false correctly. I'm happy with it, let's move on."
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "Time is O(n) since I visit every node once. Space is O(1) — I'm not building anything, just passing two numbers down."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 5,
+      "code": "def solution(root):\n    def check(node, low, high):\n        if node is None:\n            return True\n        if not (low < node.val < high):\n            return False\n        return check(node.left, low, node.val) and check(node.right, node.val, high)\n\n    return check(root, float(\"-inf\"), float(\"inf\"))\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": true,
+          "error": null,
+          "executionTimeMs": 60
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": true,
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": false,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": true,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": true,
+          "error": null,
+          "executionTimeMs": 53
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": false,
+          "error": null,
+          "executionTimeMs": 54
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": false,
+          "error": null,
+          "executionTimeMs": 54
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "testing-debugging",
+      "to": "complexity-discussion",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "complexity-discussion",
+      "to": "wrap-up",
+      "reason": "candidate-action"
+    }
+  ]
+}

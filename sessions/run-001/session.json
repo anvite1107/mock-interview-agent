@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-001",
+  "problemId": "longest-substring-without-repeating-characters",
+  "startedAt": "2026-08-15T09:09:42.870Z",
+  "endedAt": "2026-08-15T09:10:14.030Z",
+  "finalState": "testing-debugging",
+  "completed": false,
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Longest Substring Without Repeating Characters (medium)\n\nGiven a string s, find the length of the longest substring without repeating characters.\n\nConstraints:\n  - 0 <= len(s) <= 5 * 10^4\n  - s consists of English letters, digits, symbols, and spaces\n\nWrite your solution as: def solution(s: str) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Longest run of characters with no repeats. Contiguous, right?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Contiguous. I think this is a two-pointer sliding window — expand the right edge, and when you hit a duplicate pull the left edge past the previous occurrence. No questions, I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(s):\n    counts = {}\n    for ch in s:\n        counts[ch] = counts.get(ch, 0) + 1\n    return len(counts)"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "'pwwkew' comes back 4 and it should be 3. Looking at what I actually wrote, I'm counting distinct characters in the entire string, not in a window — that isn't the algorithm I just described at all."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "How do your pointers adjust when you encounter a character that has already been seen in the current window?"
+    }
+  ],
+  "submissions": [
+    {
+      "turnIndex": 3,
+      "code": "def solution(s):\n    counts = {}\n    for ch in s:\n        counts[ch] = counts.get(ch, 0) + 1\n    return len(counts)\n",
+      "results": [
+        {
+          "testCaseId": "core-1",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 3,
+          "error": null,
+          "executionTimeMs": 58
+        },
+        {
+          "testCaseId": "core-2",
+          "tag": "core",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 57
+        },
+        {
+          "testCaseId": "core-3",
+          "tag": "core",
+          "passed": false,
+          "actualOutput": 4,
+          "error": {
+            "type": "wrong-output",
+            "message": "Expected 3, got 4"
+          },
+          "executionTimeMs": 62
+        },
+        {
+          "testCaseId": "edge-1",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 0,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-2",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 1,
+          "error": null,
+          "executionTimeMs": 56
+        },
+        {
+          "testCaseId": "edge-3",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 2,
+          "error": null,
+          "executionTimeMs": 55
+        },
+        {
+          "testCaseId": "edge-4",
+          "tag": "edge",
+          "passed": true,
+          "actualOutput": 3,
+          "error": null,
+          "executionTimeMs": 56
+        }
+      ]
+    }
+  ],
+  "transitionLog": [
+    {
+      "from": "problem-intro",
+      "to": "clarifying-questions",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "clarifying-questions",
+      "to": "coding",
+      "reason": "candidate-action"
+    },
+    {
+      "from": "coding",
+      "to": "testing-debugging",
+      "reason": "candidate-action"
+    }
+  ]
+}

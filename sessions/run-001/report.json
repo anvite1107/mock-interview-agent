@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-15T09:34:10.209Z",
+  "problem": {
+    "id": "longest-substring-without-repeating-characters",
+    "title": "Longest Substring Without Repeating Characters",
+    "difficulty": "medium",
+    "referenceComplexity": {
+      "time": "O(n)",
+      "space": "O(min(n, m))"
+    }
+  },
+  "scores": {
+    "weightedTotal": 20,
+    "categories": [
+      {
+        "categoryId": "problem-understanding",
+        "label": "Problem understanding",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate restates the problem in their own words as finding the 'longest run of characters with no repeats' and confirms it is contiguous. However, they completely omit both stated constraints (string length bounds and character set) from their restatement.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "approach-correctness",
+        "label": "Approach correctness",
+        "weight": 20,
+        "score": 1,
+        "justification": "The candidate initially states an intention to use a sliding window two-pointer approach, which is the optimal strategy. However, their actual code implements a global frequency count of all characters in the string, which is a fundamentally incorrect approach and fails to solve the problem.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "complexity-analysis",
+        "label": "Complexity analysis",
+        "weight": 15,
+        "score": 1,
+        "justification": "The candidate does not state any time or space complexity for their approach during the session.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "edge-case-handling",
+        "label": "Edge-case handling",
+        "weight": 15,
+        "score": 3,
+        "justification": "The code passed all 4 edge-tagged test cases in the test suite.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "code-correctness",
+        "label": "Code correctness",
+        "weight": 20,
+        "score": 2,
+        "justification": "The code passed 2 out of 3 core-tagged test cases, failing the third (core-3).",
+        "source": "judge"
+      },
+      {
+        "categoryId": "communication",
+        "label": "Communication",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate briefly mentions their understanding and intended approach, but then writes code silently and provides sporadic narration only after tests fail.",
+        "source": "judge"
+      }
+    ],
+    "overriddenCategoryIds": []
+  },
+  "execution": {
+    "core": {
+      "passed": 2,
+      "total": 3
+    },
+    "edge": {
+      "passed": 4,
+      "total": 4
+    },
+    "results": [
+      {
+        "testCaseId": "core-1",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-2",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-3",
+        "tag": "core",
+        "passed": false
+      },
+      {
+        "testCaseId": "edge-1",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-2",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-3",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-4",
+        "tag": "edge",
+        "passed": true
+      }
+    ]
+  },
+  "flow": {
+    "finalState": "testing-debugging",
+    "completed": false,
+    "statesReached": [
+      "problem-intro",
+      "clarifying-questions",
+      "coding",
+      "testing-debugging"
+    ],
+    "forcedAdvanceCount": 0,
+    "transitions": [
+      {
+        "from": "problem-intro",
+        "to": "clarifying-questions",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "clarifying-questions",
+        "to": "coding",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "coding",
+        "to": "testing-debugging",
+        "reason": "candidate-action"
+      }
+    ]
+  },
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Longest Substring Without Repeating Characters (medium)\n\nGiven a string s, find the length of the longest substring without repeating characters.\n\nConstraints:\n  - 0 <= len(s) <= 5 * 10^4\n  - s consists of English letters, digits, symbols, and spaces\n\nWrite your solution as: def solution(s: str) -> int:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Longest run of characters with no repeats. Contiguous, right?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Contiguous. I think this is a two-pointer sliding window — expand the right edge, and when you hit a duplicate pull the left edge past the previous occurrence. No questions, I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(s):\n    counts = {}\n    for ch in s:\n        counts[ch] = counts.get(ch, 0) + 1\n    return len(counts)"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "'pwwkew' comes back 4 and it should be 3. Looking at what I actually wrote, I'm counting distinct characters in the entire string, not in a window — that isn't the algorithm I just described at all."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "How do your pointers adjust when you encounter a character that has already been seen in the current window?"
+    }
+  ]
+}

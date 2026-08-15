@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-15T09:35:40.436Z",
+  "problem": {
+    "id": "two-sum",
+    "title": "Two Sum",
+    "difficulty": "easy",
+    "referenceComplexity": {
+      "time": "O(n)",
+      "space": "O(n)"
+    }
+  },
+  "scores": {
+    "weightedTotal": 37.5,
+    "categories": [
+      {
+        "categoryId": "problem-understanding",
+        "label": "Problem understanding",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate acknowledges the problem as the classic two-sum and confirms they are returning indices. However, they completely omit reviewing or restating the constraints on array length, number ranges, target ranges, and existence of a single solution in their own words, only asking if there's always one answer.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "approach-correctness",
+        "label": "Approach correctness",
+        "weight": 20,
+        "score": 3,
+        "justification": "The candidate initially suggests a brute-force nested loop (O(n^2)), but after hitting issues with self-pairing, they pivot to the optimal one-pass hash map approach, which matches the reference solution's algorithmic strategy.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "complexity-analysis",
+        "label": "Complexity analysis",
+        "weight": 15,
+        "score": 3,
+        "justification": "The candidate states the time complexity is O(n) due to a single pass with O(1) dictionary lookups, and space complexity is O(n) for the map, which accurately matches their implementation.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "edge-case-handling",
+        "label": "Edge-case handling",
+        "weight": 15,
+        "score": 3,
+        "justification": "The code passes all 4 edge-tagged test cases. The candidate also verbally identifies edge cases like self-pairing during debugging, though they do not proactively name them before running the first code.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "code-correctness",
+        "label": "Code correctness",
+        "weight": 20,
+        "score": 2,
+        "justification": "The candidate's initial code failed core test cases due to self-pairing, requiring a debugging iteration where they rewrote the solution using a hash map. The final code passes all core and edge test cases successfully.",
+        "source": "judge"
+      },
+      {
+        "categoryId": "communication",
+        "label": "Communication",
+        "weight": 15,
+        "score": 2,
+        "justification": "The candidate narrates their thought process sporadically and skips clear transitions between phases, moving directly into coding without a structured restatement or upfront review of the approach.",
+        "source": "judge"
+      }
+    ],
+    "overriddenCategoryIds": []
+  },
+  "execution": {
+    "core": {
+      "passed": 3,
+      "total": 3
+    },
+    "edge": {
+      "passed": 4,
+      "total": 4
+    },
+    "results": [
+      {
+        "testCaseId": "core-1",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-2",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "core-3",
+        "tag": "core",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-1",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-2",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-3",
+        "tag": "edge",
+        "passed": true
+      },
+      {
+        "testCaseId": "edge-4",
+        "tag": "edge",
+        "passed": true
+      }
+    ]
+  },
+  "flow": {
+    "finalState": "wrap-up",
+    "completed": true,
+    "statesReached": [
+      "problem-intro",
+      "clarifying-questions",
+      "coding",
+      "testing-debugging",
+      "complexity-discussion",
+      "wrap-up"
+    ],
+    "forcedAdvanceCount": 0,
+    "transitions": [
+      {
+        "from": "problem-intro",
+        "to": "clarifying-questions",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "clarifying-questions",
+        "to": "coding",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "coding",
+        "to": "testing-debugging",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "testing-debugging",
+        "to": "complexity-discussion",
+        "reason": "candidate-action"
+      },
+      {
+        "from": "complexity-discussion",
+        "to": "wrap-up",
+        "reason": "candidate-action"
+      }
+    ]
+  },
+  "transcript": [
+    {
+      "speaker": "interviewer",
+      "state": "problem-intro",
+      "text": "Let's work on: Two Sum (easy)\n\nGiven an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`. You may assume that each input has exactly one solution, and you may not use the same element twice. Return the indices in ascending order.\n\nConstraints:\n  - 2 <= len(nums) <= 10^4\n  - -10^9 <= nums[i] <= 10^9\n  - -10^9 <= target <= 10^9\n  - Exactly one valid answer exists for each input\n\nWrite your solution as: def solution(nums: List[int], target: int) -> List[int]:\n\nTake a moment, and let me know if anything about the problem is unclear."
+    },
+    {
+      "speaker": "candidate",
+      "state": "problem-intro",
+      "text": "Ok so, I think this is the classic two-sum? Return indices, not the values themselves — I want to make sure I'm reading that right."
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Indices, right. And I guess there's always exactly one answer, so I don't need to worry about ties?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "clarifying-questions",
+      "text": "How would you like the two resulting indices to be ordered in your return value?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "clarifying-questions",
+      "text": "Maybe I'll just start with the straightforward nested loop and see where that gets me. I know it's not optimal but I'd rather have something working. I'm ready to start coding."
+    },
+    {
+      "speaker": "candidate",
+      "state": "coding",
+      "text": "(submits code)\n\ndef solution(nums, target):\n    for i in range(len(nums)):\n        for j in range(i, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Hm, that's not right. core-2 gave me [0, 0] for [3, 2, 4] with target 6 — it used the 3 twice. My inner loop starts at i instead of i + 1, so an element can pair with itself. Same root cause on the [3, 3] and [0, 4, 3, 0] edge cases."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "Now that you've addressed self-pairing, what other test cases are still failing and what do you think might be causing them?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "Rather than just bump the inner index, let me do the hash map version — one pass, and if I check for the complement before inserting the current value, the self-pairing problem can't happen at all. That feels like the more robust fix."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "testing-debugging",
+      "text": "How does your new hash map approach behave when duplicate values appear in the input array?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "testing-debugging",
+      "text": "(submits code)\n\ndef solution(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        if target - n in seen:\n            return [seen[target - n], i]\n        seen[n] = i\n    return []"
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "That's everything passing now, including the duplicate-zeros case that broke the first attempt. I'm happy with that, we can move on."
+    },
+    {
+      "speaker": "interviewer",
+      "state": "complexity-discussion",
+      "text": "Before we wrap up, could you walk me through the time and space complexity of the approach you just implemented?"
+    },
+    {
+      "speaker": "candidate",
+      "state": "complexity-discussion",
+      "text": "I think it's O(n) time? One pass, and dictionary lookups are constant on average. And O(n) space for the map. Does that sound right?"
+    },
+    {
+      "speaker": "interviewer",
+      "state": "wrap-up",
+      "text": "That's everything I wanted to cover. Thanks for walking me through it."
+    }
+  ]
+}
